@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --base-color--green: #10b981; /* Tailwind emerald-500 */
 }
 
 @theme inline {
@@ -16,6 +17,7 @@
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --base-color--green: #059669; /* darker green for dark mode */
   }
 }
 
@@ -23,4 +25,43 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Hide native video time display in WebKit/Blink browsers (Chrome, Edge, Safari)
+   This hides current and remaining time while keeping native controls visible. */
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display,
+video::-webkit-media-controls-timeline,
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+}
+/* Hide Google Translate top bar */
+/* Hide Google branding text */
+.goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+}
+
+/* Fix layout spacing */
+.goog-te-gadget {
+  font-size: 0 !important;
+}
+
+/* Style dropdown to match navbar */
+.goog-te-combo {
+  font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #000;
+  background-color: white;
+  cursor: pointer;
+}
+
+/* Remove Google top bar */
+body > .goog-te-banner-frame {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
 }
