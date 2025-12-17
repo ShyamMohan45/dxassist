@@ -346,6 +346,7 @@
 // }
 import Image from "next/image";
 import GoogleSignButton from "./components/GoogleSignButton";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -439,57 +440,67 @@ export default function Home() {
         </div>
       </div>
 
-      {/* GET STARTED */}
       <section className="relative bg-black mt-32 py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/40 to-cyan-900/40"></div>
+  <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/40 to-cyan-900/40"></div>
 
-        <h2 className="relative text-5xl font-extrabold text-center text-white mb-20">
-          Let&apos;s Get Started
-        </h2>
+  <h2 className="relative text-5xl font-extrabold text-center text-white mb-20">
+    Let&apos;s Get Started
+  </h2>
 
-        <div className="relative flex justify-center gap-12">
-          {[
-            { img: "/feeling_good_image.png", text: "I feel healthy most of the time" },
-            { img: "/feeling_concern_image.png", text: "I am concerned about some health conditions" },
-            { img: "/concern_about_serious_disease.png", text: "I am concerned about my kidneys" },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="
-                w-[384px] h-[445px] bg-[#073B44]
-                rounded-[2.5rem] flex flex-col
-                hover:-translate-y-6 hover:rotate-[-1deg]
-                hover:shadow-[0_40px_120px_rgba(0,0,0,0.6)]
-                transition-all duration-700
-              "
-            >
-              <div className="h-[260px] flex items-center justify-center">
-                <img
-                  src={item.img}
-                  alt={item.text}
-                  className="h-[240px] w-auto hover:scale-110 transition duration-500"
-                />
-              </div>
-
-              <div className="mt-auto px-8 pb-10 text-center">
-                <p className="text-white text-lg mb-6">
-                  {item.text}
-                </p>
-                <a className="text-emerald-300 font-semibold tracking-wide hover:underline cursor-pointer">
-                  We can help →
-                </a>
-              </div>
-            </div>
-          ))}
+  <div className="relative flex justify-center gap-12">
+    {[
+      {
+        img: "/feeling_good_image.png",
+        text: "I feel healthy most of the time",
+        href: "/feel-healthy",
+      },
+      {
+        img: "/feeling_concern_image.png",
+        text: "I am concerned about some health conditions",
+        href: "/feel-concise",
+      },
+      {
+        img: "/concern_about_serious_disease.png",
+        text: "I am concerned about my kidneys",
+        href: "/feel-concern_about_serious_disease",
+      },
+    ].map((item, i) => (
+      <div
+        key={i}
+        className="w-[384px] h-[445px] bg-[#073B44] rounded-[2.5rem] flex flex-col
+        hover:-translate-y-6 hover:rotate-[-1deg]
+        hover:shadow-[0_40px_120px_rgba(0,0,0,0.6)]
+        transition-all duration-700"
+      >
+        <div className="h-[260px] flex items-center justify-center">
+          <img
+            src={item.img}
+            alt={item.text}
+            className="h-[240px] w-auto hover:scale-110 transition duration-500"
+          />
         </div>
 
-        <p className="relative max-w-[900px] text-white mx-auto text-center text-lg opacity-80 mt-24">
-          DxAssist supports clinicians by converting unstructured clinical notes
-          and patient-uploaded images into concise summaries and evidence-backed,
-          prioritized diagnostic hypotheses using generative AI with retrieval
-          augmentation.
-        </p>
-      </section>
+        <div className="mt-auto px-8 pb-10 text-center">
+          <p className="text-white text-lg mb-6">{item.text}</p>
+
+          <Link
+            href={item.href}
+            className="text-emerald-300 font-semibold tracking-wide hover:underline"
+          >
+            We can help →
+          </Link>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <p className="relative max-w-[900px] text-white mx-auto text-center text-lg opacity-80 mt-24">
+    DxAssist supports clinicians by converting unstructured clinical notes
+    and patient-uploaded images into concise summaries and evidence-backed,
+    prioritized diagnostic hypotheses using generative AI with retrieval
+    augmentation.
+  </p>
+</section>
     </>
   );
 }

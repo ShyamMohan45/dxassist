@@ -174,6 +174,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning> {/* ✅ ADD THIS */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-300`}
+        
       >
         <Providers> {/* ✅ WRAP ONLY ONCE */}
           <SessionWrapper>
