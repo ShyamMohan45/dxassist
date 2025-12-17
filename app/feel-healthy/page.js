@@ -72,14 +72,14 @@ export default function page() {
   
         <div className="text-center border-2 border-black">
                 <img
-                    src="/vegetable-millet-khichdi.jpg"
-                    alt="Vegetable Millet Khichdi"
+                    src="/vegetable-salad.jpg"
+                    alt="Vegetable Salad"
                     className="w-full h-[260px] object-cover rounded-md mb-4 border-2 border-black"
                 />
                 <h3 className="text-xl font-serif text-teal-700 underline mb-4">
-                    Vegetable Millet Khichdi
+                    Vegetable Salad
                 </h3>
-                        <Link href="/Recipesoffeelgood/milletkhichdi">
+                        <Link href="/Recipesoffeelgood/vegetablesalad">
                             <button className="px-6 py-2 border-2 border-teal-700 text-teal-700 rounded-full hover:bg-teal-700 hover:text-white transition">
                                 GO TO RECIPE
                             </button>
@@ -90,14 +90,14 @@ export default function page() {
 
                 <div className="text-center border-2 border-black">
                 <img
-                    src="/palak-dal.jpg"
-                    alt="Palak Dal"
+                    src="/lemon_juice.jpg"
+                    alt="Lemon Juice"
                     className="w-full h-[260px] object-cover rounded-md mb-4 border-2 border-black"
                 />
                 <h3 className="text-xl font-serif text-teal-700 underline mb-4">
-                    Palak Dal
+                    Lemon Juice
                 </h3>
-                <Link href="/Recipesoffeelgood/palakdal">
+                <Link href="/Recipesoffeelgood/lemonjuice">
                     <button className="px-6 py-2 border-2 border-teal-700 text-teal-700 rounded-full hover:bg-teal-700 hover:text-white transition">
                         GO TO RECIPE
                     </button>

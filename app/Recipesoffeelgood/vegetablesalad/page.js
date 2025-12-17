@@ -5,19 +5,18 @@ export default function Page() {
   return (
     <main className="bg-[#f7fbfa]">
 
-
       <section className='w-full h-[512.94px] border-2 border-black overflow-hidden'>
 
         <div className='w-full h-[50px] border-2 border-black flex items-center px-10 bg-white'>
           <h1 className='text-3xl font-serif tracking-wide text-teal-900'>
-            Sprouted Moong Salad
+            Fresh Vegetable Salad
           </h1>
         </div>
 
         <div className='w-full h-[322px] border-2 border-black relative bg-gradient-to-br from-[#eaf3f1] to-[#d9ebe7]'>
           <Image
-            src='/sproutedmoong.jpg'
-            alt='Sprouted Moong'
+            src='/vegetable-salad.jpg'
+            alt='Vegetable Salad'
             fill
             className='object-contain drop-shadow-xl'
             quality={100}
@@ -31,13 +30,13 @@ export default function Page() {
 
             <div className='flex flex-col justify-center'>
               <span className='text-xs uppercase tracking-wider text-gray-400'>Serves</span>
-              <span className='font-semibold text-lg text-gray-800'>People (as your need)</span>
+              <span className='font-semibold text-lg text-gray-800'>1–2 People</span>
             </div>
 
             <div className='flex flex-col justify-center'>
               <span className='text-xs uppercase tracking-wider text-gray-400'>Prep Time</span>
               <span className='font-semibold text-sm text-gray-800'>
-                Wrap soaked beans in a clean, damp cloth and tie lightly.
+                Wash and chop fresh vegetables.
               </span>
             </div>
 
@@ -48,7 +47,7 @@ export default function Page() {
 
             <div className='flex flex-col justify-center'>
               <span className='text-xs uppercase tracking-wider text-gray-400'>Diet Type</span>
-              <span className='font-semibold text-lg text-teal-700'>High Protein</span>
+              <span className='font-semibold text-lg text-teal-700'>Light & High Fiber</span>
             </div>
 
           </div>
@@ -56,78 +55,71 @@ export default function Page() {
 
       </section>
 
-     
       <section className="max-w-7xl mx-auto px-10 py-16 grid grid-cols-3 gap-16">
 
-       
         <div className="col-span-2">
 
-         
           <h2 className="text-2xl font-serif text-gray-900 mb-4">Ingredients</h2>
           <ul className="list-disc ml-6 text-gray-700 space-y-2 mb-10">
-            <li>1 cup whole green moong beans (sprouted)</li>
-            <li>1 small onion (finely chopped)</li>
+            <li>1 cucumber (sliced)</li>
+            <li>1 carrot (grated or sliced)</li>
             <li>1 tomato (chopped)</li>
-            <li>Green chilli (optional)</li>
-            <li>Lemon juice</li>
-            <li>Salt to taste</li>
-            <li>Fresh coriander leaves</li>
+            <li>½ onion (thinly sliced)</li>
+            <li>½ cup boiled sweet corn (optional)</li>
+            <li>Fresh lemon juice</li>
+            <li>Salt and black pepper to taste</li>
+            <li>Fresh coriander or mint leaves</li>
           </ul>
 
-         
           <h2 className="text-2xl font-serif text-gray-900 mb-4">Instructions</h2>
           <ol className="list-decimal ml-6 text-gray-700 space-y-3 leading-relaxed">
-            <li>Wash and soak green moong overnight in clean water.</li>
-            <li>Drain and wrap the soaked beans in a clean, damp cloth.</li>
-            <li>Keep in a warm place for 24–36 hours until sprouts appear.</li>
-            <li>Once sprouted, rinse gently and place in a mixing bowl.</li>
-            <li>Add chopped onion, tomato, salt, lemon juice and mix well.</li>
-            <li>Garnish with fresh coriander and serve fresh.</li>
+            <li>Wash all vegetables thoroughly.</li>
+            <li>Chop and slice vegetables into a mixing bowl.</li>
+            <li>Add salt, pepper, and lemon juice.</li>
+            <li>Toss gently to combine all ingredients.</li>
+            <li>Garnish with fresh coriander or mint.</li>
+            <li>Serve immediately for best freshness.</li>
           </ol>
 
         </div>
 
-       
         <div className="bg-gray-50 border rounded-md p-6 h-fit">
           <h2 className="text-xl font-semibold mb-4">Nutrients per serving</h2>
 
           <div className="divide-y text-gray-700">
-            <div className="flex justify-between py-2"><span>Calories</span><span>180</span></div>
-            <div className="flex justify-between py-2"><span>Protein</span><span>14 g</span></div>
-            <div className="flex justify-between py-2"><span>Carbohydrates</span><span>28 g</span></div>
+            <div className="flex justify-between py-2"><span>Calories</span><span>120</span></div>
+            <div className="flex justify-between py-2"><span>Protein</span><span>4 g</span></div>
+            <div className="flex justify-between py-2"><span>Carbohydrates</span><span>18 g</span></div>
             <div className="flex justify-between py-2"><span>Fat</span><span>2 g</span></div>
-            <div className="flex justify-between py-2"><span>Fiber</span><span>8 g</span></div>
-            <div className="flex justify-between py-2"><span>Iron</span><span>2.5 mg</span></div>
+            <div className="flex justify-between py-2"><span>Fiber</span><span>6 g</span></div>
+            <div className="flex justify-between py-2"><span>Vitamin C</span><span>35 mg</span></div>
           </div>
         </div>
 
       </section>
-  
+
       <section className="w-full bg-[#083c47] text-white px-10 py-10 mt-20">
 
         <div className="max-w-6xl mx-auto text-center space-y-4">
 
           <p className="text-sm">
-            DxAssist is an AI-powered healthcare support platform that transforms
-            unstructured clinical notes and user-uploaded images into clear,
-            easy-to-understand health insights.
+            Vegetable salad supports digestion, weight management, and overall
+            wellness by providing essential vitamins, minerals, and antioxidants.
           </p>
 
           <p className="text-sm">
-            Using Generative AI with Retrieval-Augmented Generation (RAG), DxAssist
-            helps clinicians summarize patient conditions and explore possible
-            diagnoses, while reducing documentation burden and diagnostic oversight.
+            DxAssist combines nutrition guidance with AI-powered clinical insight
+            to help users make healthier daily food choices.
           </p>
 
           <p className="text-sm">
-            The platform also supports everyday users through multilingual access,
-            image-based symptom analysis, nutrition guidance, and preventive health
-            suggestions.
+            With multilingual access and image-based health analysis, DxAssist
+            makes preventive healthcare and nutrition awareness accessible to all.
           </p>
 
           <p className="text-xs text-gray-300">
-            DxAssist is intended for informational and decision-support purposes only
-            and does not replace professional medical advice.
+            DxAssist is for informational support only and does not replace
+            professional medical diagnosis or treatment.
           </p>
 
         </div>

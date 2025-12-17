@@ -449,6 +449,7 @@ export default function Home() {
 
   <div className="relative flex justify-center gap-12">
     {[
+      
       {
         img: "/feeling_good_image.png",
         text: "I feel healthy most of the time",
@@ -461,7 +462,7 @@ export default function Home() {
       },
       {
         img: "/concern_about_serious_disease.png",
-        text: "I am concerned about my kidneys",
+        text: "I am concern about my serious disease",
         href: "/feel-concern_about_serious_disease",
       },
     ].map((item, i) => (
