@@ -5,6 +5,10 @@
   --foreground: #171717;
   --base-color--green: #10b981; /* Tailwind emerald-500 */
 }
+body {
+  @apply bg-white text-black dark:bg-slate-900 dark:text-white;
+}
+
 
 @theme inline {
   --color-background: var(--background);
