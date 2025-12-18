@@ -3,131 +3,146 @@ import Image from 'next/image'
 
 export default function Page() {
   return (
-    <main className="bg-[#f7fbfa]">
+    <main className="bg-gradient-to-br from-[#f2fbf8] via-[#f7fbfa] to-[#eef6f4] text-gray-800">
 
+      {/* HERO CARD */}
+      <section className="w-full max-w-7xl mx-auto mt-10 rounded-3xl overflow-hidden shadow-2xl border border-black/10 bg-white">
 
-      <section className='w-full h-[512.94px] border-2 border-black overflow-hidden'>
-
-        <div className='w-full h-[50px] border-2 border-black flex items-center px-10 bg-white'>
-          <h1 className='text-3xl font-serif tracking-wide text-teal-900'>
+        {/* HEADER */}
+        <div className="w-full h-[56px] flex items-center px-10 bg-gradient-to-r from-teal-900 to-teal-700">
+          <h1 className="text-3xl font-serif tracking-wide text-white drop-shadow">
             Sprouted Moong Salad
           </h1>
         </div>
 
-        <div className='w-full h-[322px] border-2 border-black relative bg-gradient-to-br from-[#eaf3f1] to-[#d9ebe7]'>
+        {/* IMAGE */}
+        <div className="w-full h-[340px] relative bg-gradient-to-br from-[#eaf3f1] to-[#d9ebe7]">
           <Image
-            src='/sproutedmoong.jpg'
-            alt='Sprouted Moong'
+            src="/sproutedmoong.jpg"
+            alt="Sprouted Moong"
             fill
-            className='object-contain drop-shadow-xl'
+            className="object-contain scale-95 hover:scale-100 transition-transform duration-700 drop-shadow-2xl"
             quality={100}
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent pointer-events-none"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         </div>
 
-        <div className='w-full h-[120px] border-2 border-black flex items-center bg-white'>
-          <div className='w-full grid grid-cols-4 text-center divide-x px-6'>
+        {/* INFO STRIP */}
+        <div className="w-full h-[120px] flex items-center bg-white">
+          <div className="w-full grid grid-cols-4 text-center divide-x divide-gray-200 px-8">
 
-            <div className='flex flex-col justify-center'>
-              <span className='text-xs uppercase tracking-wider text-gray-400'>Serves</span>
-              <span className='font-semibold text-lg text-gray-800'>People (as your need)</span>
-            </div>
-
-            <div className='flex flex-col justify-center'>
-              <span className='text-xs uppercase tracking-wider text-gray-400'>Prep Time</span>
-              <span className='font-semibold text-sm text-gray-800'>
-                Wrap soaked beans in a clean, damp cloth and tie lightly.
-              </span>
-            </div>
-
-            <div className='flex flex-col justify-center'>
-              <span className='text-xs uppercase tracking-wider text-gray-400'>Cook Time</span>
-              <span className='font-semibold text-lg text-gray-800'>No Cooking</span>
-            </div>
-
-            <div className='flex flex-col justify-center'>
-              <span className='text-xs uppercase tracking-wider text-gray-400'>Diet Type</span>
-              <span className='font-semibold text-lg text-teal-700'>High Protein</span>
-            </div>
+            {[
+              { label: 'Serves', value: 'As per need' },
+              { label: 'Prep Time', value: 'Natural sprouting process' },
+              { label: 'Cook Time', value: 'No Cooking' },
+              { label: 'Diet Type', value: 'High Protein', highlight: true },
+            ].map((item, i) => (
+              <div key={i} className="flex flex-col justify-center space-y-1">
+                <span className="text-xs uppercase tracking-widest text-gray-400">
+                  {item.label}
+                </span>
+                <span
+                  className={`font-semibold ${
+                    item.highlight
+                      ? 'text-lg text-teal-700'
+                      : 'text-base text-gray-800'
+                  }`}
+                >
+                  {item.value}
+                </span>
+              </div>
+            ))}
 
           </div>
         </div>
 
       </section>
 
-     
-      <section className="max-w-7xl mx-auto px-10 py-16 grid grid-cols-3 gap-16">
+      {/* CONTENT */}
+      <section className="max-w-7xl mx-auto px-10 py-20 grid grid-cols-3 gap-16">
 
-       
-        <div className="col-span-2">
+        {/* LEFT */}
+        <div className="col-span-2 space-y-12">
 
-         
-          <h2 className="text-2xl font-serif text-gray-900 mb-4">Ingredients</h2>
-          <ul className="list-disc ml-6 text-gray-700 space-y-2 mb-10">
-            <li>1 cup whole green moong beans (sprouted)</li>
-            <li>1 small onion (finely chopped)</li>
-            <li>1 tomato (chopped)</li>
-            <li>Green chilli (optional)</li>
-            <li>Lemon juice</li>
-            <li>Salt to taste</li>
-            <li>Fresh coriander leaves</li>
-          </ul>
+          <div>
+            <h2 className="text-3xl font-serif text-teal-900 mb-4">
+              Ingredients
+            </h2>
+            <ul className="list-disc ml-6 text-gray-700 space-y-2 leading-relaxed">
+              <li>1 cup whole green moong beans (sprouted)</li>
+              <li>1 small onion (finely chopped)</li>
+              <li>1 tomato (chopped)</li>
+              <li>Green chilli (optional)</li>
+              <li>Lemon juice</li>
+              <li>Salt to taste</li>
+              <li>Fresh coriander leaves</li>
+            </ul>
+          </div>
 
-         
-          <h2 className="text-2xl font-serif text-gray-900 mb-4">Instructions</h2>
-          <ol className="list-decimal ml-6 text-gray-700 space-y-3 leading-relaxed">
-            <li>Wash and soak green moong overnight in clean water.</li>
-            <li>Drain and wrap the soaked beans in a clean, damp cloth.</li>
-            <li>Keep in a warm place for 24–36 hours until sprouts appear.</li>
-            <li>Once sprouted, rinse gently and place in a mixing bowl.</li>
-            <li>Add chopped onion, tomato, salt, lemon juice and mix well.</li>
-            <li>Garnish with fresh coriander and serve fresh.</li>
-          </ol>
+          <div>
+            <h2 className="text-3xl font-serif text-teal-900 mb-4">
+              Instructions
+            </h2>
+            <ol className="list-decimal ml-6 text-gray-700 space-y-3 leading-loose">
+              <li>Wash and soak green moong overnight.</li>
+              <li>Drain and wrap beans in a clean damp cloth.</li>
+              <li>Keep warm for 24–36 hours until sprouts appear.</li>
+              <li>Rinse gently and transfer to a mixing bowl.</li>
+              <li>Add onion, tomato, salt and lemon juice.</li>
+              <li>Mix well, garnish with coriander and serve fresh.</li>
+            </ol>
+          </div>
 
         </div>
 
-       
-        <div className="bg-gray-50 border rounded-md p-6 h-fit">
-          <h2 className="text-xl font-semibold mb-4">Nutrients per serving</h2>
+        {/* RIGHT CARD */}
+        <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 h-fit">
+          <h2 className="text-2xl font-semibold mb-6 text-teal-900">
+            Nutrients per serving
+          </h2>
 
           <div className="divide-y text-gray-700">
-            <div className="flex justify-between py-2"><span>Calories</span><span>180</span></div>
-            <div className="flex justify-between py-2"><span>Protein</span><span>14 g</span></div>
-            <div className="flex justify-between py-2"><span>Carbohydrates</span><span>28 g</span></div>
-            <div className="flex justify-between py-2"><span>Fat</span><span>2 g</span></div>
-            <div className="flex justify-between py-2"><span>Fiber</span><span>8 g</span></div>
-            <div className="flex justify-between py-2"><span>Iron</span><span>2.5 mg</span></div>
+            {[
+              ['Calories', '180'],
+              ['Protein', '14 g'],
+              ['Carbohydrates', '28 g'],
+              ['Fat', '2 g'],
+              ['Fiber', '8 g'],
+              ['Iron', '2.5 mg'],
+            ].map(([label, value], i) => (
+              <div key={i} className="flex justify-between py-3">
+                <span>{label}</span>
+                <span className="font-medium">{value}</span>
+              </div>
+            ))}
           </div>
         </div>
 
       </section>
-  
-      <section className="w-full bg-[#083c47] text-white px-10 py-10 mt-20">
 
-        <div className="max-w-6xl mx-auto text-center space-y-4">
+      {/* FOOTER */}
+      <section className="w-full bg-gradient-to-r from-[#062f38] to-[#0a4c58] text-white px-10 py-14 mt-24">
+        <div className="max-w-5xl mx-auto text-center space-y-4">
 
-          <p className="text-sm">
+          <p className="text-sm opacity-90">
             DxAssist is an AI-powered healthcare support platform that transforms
-            unstructured clinical notes and user-uploaded images into clear,
-            easy-to-understand health insights.
+            complex medical data into clear, human-friendly insights.
           </p>
 
-          <p className="text-sm">
-            Using Generative AI with Retrieval-Augmented Generation (RAG), DxAssist
-            helps clinicians summarize patient conditions and explore possible
-            diagnoses, while reducing documentation burden and diagnostic oversight.
+          <p className="text-sm opacity-90">
+            Using Generative AI and RAG, DxAssist helps clinicians and users
+            understand conditions, nutrition, and preventive care with confidence.
           </p>
 
-          <p className="text-sm">
-            The platform also supports everyday users through multilingual access,
-            image-based symptom analysis, nutrition guidance, and preventive health
-            suggestions.
+          <p className="text-sm opacity-90">
+            Multilingual access and image-based analysis make health awareness
+            inclusive and accessible to everyone.
           </p>
 
-          <p className="text-xs text-gray-300">
-            DxAssist is intended for informational and decision-support purposes only
-            and does not replace professional medical advice.
+          <p className="text-xs text-gray-300 mt-6">
+            DxAssist is for informational purposes only and does not replace
+            professional medical advice.
           </p>
 
         </div>

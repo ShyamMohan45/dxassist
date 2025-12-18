@@ -244,28 +244,182 @@
 //     </div>
 //   );
 // }
+// "use client";
+
+// export default function LoginPage() {
+//   return (
+//     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
+
+//       {/* HEALTHCARE GRADIENT BACKGROUND */}
+//       <div className="absolute inset-0 bg-gradient-to-br from-[#e8f8f5] via-[#f4fbff] to-[#e6f0ff]" />
+
+//       {/* SOFT MEDICAL GLOW SHAPES */}
+//       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-cyan-300/30 rounded-full blur-[120px]" />
+//       <div className="absolute bottom-[-200px] right-[-200px] w-[600px] h-[600px] bg-blue-300/30 rounded-full blur-[140px]" />
+
+//       {/* GLASS OVERLAY */}
+//       <div className="absolute inset-0 bg-white/40 backdrop-blur-xl"></div>
+
+//       {/* LOGIN CARD */}
+//       <div
+//         className="
+//           relative z-10 w-[400px]
+//           rounded-3xl
+//           bg-white/70 backdrop-blur-2xl
+//           border border-white/60
+//           p-10 text-gray-800
+//           shadow-[0_20px_60px_rgba(0,0,0,0.15)]
+//           animate-[fadeUp_0.8s_ease-out]
+//         "
+//       >
+//         <h1 className="text-3xl font-bold text-center mb-2 text-blue-900">
+//           Welcome Back
+//         </h1>
+//         <p className="text-center text-gray-500 mb-10">
+//           Login to your healthcare account
+//         </p>
+
+//         {/* EMAIL */}
+//         <div className="relative mb-8">
+//           <input
+//             type="email"
+//             required
+//             className="
+//               peer w-full bg-transparent
+//               border-b border-gray-300
+//               py-3 text-lg
+//               outline-none
+//               focus:border-blue-500
+//               transition-all
+//             "
+//           />
+//           <label
+//             className="
+//               absolute left-0 top-3 text-gray-400
+//               peer-focus:-top-3 peer-focus:text-sm
+//               peer-focus:text-blue-500
+//               peer-valid:-top-3 peer-valid:text-sm
+//               transition-all
+//             "
+//           >
+//             Email Address
+//           </label>
+//         </div>
+
+//         {/* PASSWORD */}
+//         <div className="relative mb-6">
+//           <input
+//             type="password"
+//             required
+//             className="
+//               peer w-full bg-transparent
+//               border-b border-gray-300
+//               py-3 text-lg
+//               outline-none
+//               focus:border-teal-500
+//               transition-all
+//             "
+//           />
+//           <label
+//             className="
+//               absolute left-0 top-3 text-gray-400
+//               peer-focus:-top-3 peer-focus:text-sm
+//               peer-focus:text-teal-500
+//               peer-valid:-top-3 peer-valid:text-sm
+//               transition-all
+//             "
+//           >
+//             Password
+//           </label>
+//         </div>
+
+//         {/* OPTIONS */}
+//         <div className="flex justify-between text-sm mb-8 text-gray-500">
+//           <label className="flex gap-2 cursor-pointer hover:text-gray-700">
+//             <input type="checkbox" className="accent-blue-500" />
+//             Remember me
+//           </label>
+//           <span className="hover:text-blue-600 cursor-pointer">
+//             Forgot password?
+//           </span>
+//         </div>
+
+//         {/* BUTTON */}
+//         <button
+//           className="
+//             w-full py-3 rounded-full text-lg font-semibold text-white
+//             bg-gradient-to-r from-blue-500 to-teal-400
+//             hover:shadow-lg hover:-translate-y-0.5
+//             transition-all duration-300
+//             active:scale-95
+//           "
+//         >
+//           Login
+//         </button>
+
+//         {/* FOOTER */}
+//         <p className="text-center mt-8 text-gray-500">
+//           New here?{" "}
+//           <span className="text-blue-600 cursor-pointer hover:underline">
+//             Create account
+//           </span>
+//         </p>
+//       </div>
+//     </div>
+//   );
+// }
 "use client";
 
+import { signIn } from "next-auth/react";
+import { useState } from "react";
+
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    await signIn("credentials", {
+      email,
+      password,
+      callbackUrl: "/", // change if needed
+    });
+
+    setLoading(false);
+  };
+
+  const handleForgotPassword = async () => {
+    if (!email) {
+      alert("Please enter your email first");
+      return;
+    }
+
+    await fetch("/api/auth/forgot-password", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+    });
+
+    alert("Password reset link sent to your email");
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
 
-      {/* HEALTHCARE GRADIENT BACKGROUND */}
+      {/* BACKGROUND */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#e8f8f5] via-[#f4fbff] to-[#e6f0ff]" />
-
-      {/* SOFT MEDICAL GLOW SHAPES */}
       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-cyan-300/30 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-200px] right-[-200px] w-[600px] h-[600px] bg-blue-300/30 rounded-full blur-[140px]" />
-
-      {/* GLASS OVERLAY */}
       <div className="absolute inset-0 bg-white/40 backdrop-blur-xl"></div>
 
       {/* LOGIN CARD */}
-      <div
+      <form
+        onSubmit={handleLogin}
         className="
           relative z-10 w-[400px]
-          rounded-3xl
-          bg-white/70 backdrop-blur-2xl
+          rounded-3xl bg-white/70 backdrop-blur-2xl
           border border-white/60
           p-10 text-gray-800
           shadow-[0_20px_60px_rgba(0,0,0,0.15)]
@@ -284,24 +438,11 @@ export default function LoginPage() {
           <input
             type="email"
             required
-            className="
-              peer w-full bg-transparent
-              border-b border-gray-300
-              py-3 text-lg
-              outline-none
-              focus:border-blue-500
-              transition-all
-            "
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="peer w-full bg-transparent border-b border-gray-300 py-3 text-lg outline-none focus:border-blue-500 transition-all"
           />
-          <label
-            className="
-              absolute left-0 top-3 text-gray-400
-              peer-focus:-top-3 peer-focus:text-sm
-              peer-focus:text-blue-500
-              peer-valid:-top-3 peer-valid:text-sm
-              transition-all
-            "
-          >
+          <label className="absolute left-0 top-3 text-gray-400 peer-focus:-top-3 peer-focus:text-sm peer-focus:text-blue-500 peer-valid:-top-3 peer-valid:text-sm transition-all">
             Email Address
           </label>
         </div>
@@ -311,24 +452,11 @@ export default function LoginPage() {
           <input
             type="password"
             required
-            className="
-              peer w-full bg-transparent
-              border-b border-gray-300
-              py-3 text-lg
-              outline-none
-              focus:border-teal-500
-              transition-all
-            "
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="peer w-full bg-transparent border-b border-gray-300 py-3 text-lg outline-none focus:border-teal-500 transition-all"
           />
-          <label
-            className="
-              absolute left-0 top-3 text-gray-400
-              peer-focus:-top-3 peer-focus:text-sm
-              peer-focus:text-teal-500
-              peer-valid:-top-3 peer-valid:text-sm
-              transition-all
-            "
-          >
+          <label className="absolute left-0 top-3 text-gray-400 peer-focus:-top-3 peer-focus:text-sm peer-focus:text-teal-500 peer-valid:-top-3 peer-valid:text-sm transition-all">
             Password
           </label>
         </div>
@@ -339,22 +467,28 @@ export default function LoginPage() {
             <input type="checkbox" className="accent-blue-500" />
             Remember me
           </label>
-          <span className="hover:text-blue-600 cursor-pointer">
+          <span
+            onClick={handleForgotPassword}
+            className="hover:text-blue-600 cursor-pointer"
+          >
             Forgot password?
           </span>
         </div>
 
         {/* BUTTON */}
         <button
+          type="submit"
+          disabled={loading}
           className="
             w-full py-3 rounded-full text-lg font-semibold text-white
             bg-gradient-to-r from-blue-500 to-teal-400
             hover:shadow-lg hover:-translate-y-0.5
             transition-all duration-300
             active:scale-95
+            disabled:opacity-60
           "
         >
-          Login
+          {loading ? "Logging in..." : "Login"}
         </button>
 
         {/* FOOTER */}
@@ -364,7 +498,7 @@ export default function LoginPage() {
             Create account
           </span>
         </p>
-      </div>
+      </form>
     </div>
   );
 }
