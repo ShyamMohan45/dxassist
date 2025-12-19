@@ -269,9 +269,9 @@ export default function Navbar() {
       {/* NAV LINKS */}
       <ul className="relative flex items-center gap-10 text-sm font-semibold">
         {[
-          { name: "Diagnostic Insight", href: "/diagnostics" },
-          { name: "History & Records", href: "/history" },
-          { name: "Data Templates", href: "/templates" },
+          { name: "Patient Queue", href: "/templates" },
+          { name: "Clinical Analysis", href: "/diagnostics" },
+          { name: "Medical Knowledge Base", href: "/history" },
         ].map((item) => (
           <li key={item.href} className="relative group">
             <Link
