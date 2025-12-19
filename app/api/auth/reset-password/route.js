@@ -1,24 +1,28 @@
-import bcrypt from "bcrypt"
-import { connectDB } from "@/lib/db"
-import User from "@/models/User"
+import { getPool } from "@/lib/db";
+import bcrypt from "bcrypt";
+import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const { token, password } = await req.json()
-  await connectDB()
+  const { token, password } = await req.json();
+  const pool = getPool();
 
-  const user = await User.findOne({
-    resetToken: token,
-    resetTokenExpiry: { $gt: Date.now() },
-  })
+  const [rows] = await pool.query(
+    "SELECT user_id FROM password_resets WHERE token = ? AND expires_at > NOW()",
+    [token]
+  );
 
-  if (!user) {
-    return Response.json({ message: "Invalid token" }, { status: 400 })
+  if (!rows.length) {
+    return NextResponse.json({ success: false, message: "Invalid or expired" }, { status: 400 });
   }
 
-  user.password = await bcrypt.hash(password, 10)
-  user.resetToken = null
-  user.resetTokenExpiry = null
-  await user.save()
+  const hash = await bcrypt.hash(password, 10);
 
-  return Response.json({ message: "Password updated" })
+  await pool.query(
+    "UPDATE users SET password = ? WHERE id = ?",
+    [hash, rows[0].user_id]
+  );
+
+  await pool.query("DELETE FROM password_resets WHERE token = ?", [token]);
+
+  return NextResponse.json({ success: true });
 }

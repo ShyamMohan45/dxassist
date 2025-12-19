@@ -344,12 +344,33 @@
 //     </>
 //   );
 // }
+"use client";
 import Image from "next/image";
 import GoogleSignButton from "./components/GoogleSignButton";
 import Link from "next/link";
-
+import { use, useEffect } from "react";
 export default function Home() {
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const res = await fetch("/api/posts");
+
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+
+      const response = await res.json(); // ✅ await here
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  fetchData();
+}, []);
+
   return (
+
     <>
       {/* HERO TOP BAR */}
       <div className="bg-white h-[70px] w-full flex items-center justify-center relative overflow-hidden">

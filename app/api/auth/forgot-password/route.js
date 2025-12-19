@@ -1,37 +1,40 @@
-import crypto from "crypto"
-import { connectDB } from "@/lib/db"
-import User from "@/models/User"
-import nodemailer from "nodemailer"
+import { getPool } from "@/lib/db";
+import { NextResponse } from "next/server";
+import { v4 as uuid } from "uuid";
+import nodemailer from "nodemailer";
 
 export async function POST(req) {
-  const { email } = await req.json()
-  await connectDB()
+  const { email } = await req.json();
+  const pool = getPool();
 
-  const user = await User.findOne({ email })
-  if (!user) {
-    return Response.json({ message: "User not found" }, { status: 404 })
-  }
+  const [users] = await pool.query(
+    "SELECT id FROM users WHERE email = ?",
+    [email]
+  );
 
-  const token = crypto.randomBytes(32).toString("hex")
-  user.resetToken = token
-  user.resetTokenExpiry = Date.now() + 3600000
-  await user.save()
+  if (!users.length) return NextResponse.json({ success: true });
 
-  const resetLink = `${process.env.NEXTAUTH_URL}/reset-password/${token}`
+  const token = uuid();
+  const expires = new Date(Date.now() + 15 * 60 * 1000);
+
+  await pool.query(
+    "INSERT INTO password_resets (user_id, token, expires_at) VALUES (?, ?, ?)",
+    [users[0].id, token, expires]
+  );
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.EMAIL,
+      user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
-  })
+  });
 
   await transporter.sendMail({
     to: email,
-    subject: "Reset Password",
-    html: `<a href="${resetLink}">Reset Password</a>`,
-  })
+    subject: "Reset your password",
+    html: `<a href="http://localhost:3000/reset-password/${token}">Reset Password</a>`,
+  });
 
-  return Response.json({ message: "Reset email sent" })
+  return NextResponse.json({ success: true });
 }
