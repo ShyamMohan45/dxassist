@@ -8,6 +8,10 @@
 body {
   @apply bg-white text-black dark:bg-slate-900 dark:text-white;
 }
+html, body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
 
 
 @theme inline {
