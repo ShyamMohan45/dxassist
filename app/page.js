@@ -344,41 +344,118 @@
 //     </>
 //   );
 // }
+
+
+
+// "use client";
+// import Image from "next/image";
+// import GoogleSignButton from "./components/GoogleSignButton";
+// import Link from "next/link";
+// import { use, useEffect, useRef } from "react";
+// export default function Home() {
+// useEffect(() => {
+//   const fetchData = async () => {
+//     try {
+//       const res = await fetch("/api/posts");
+
+//       if (!res.ok) {
+//         throw new Error("Failed to fetch data");
+//       }
+
+//       const response = await res.json(); // ✅ await here
+//       console.log(response);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
+
+//   fetchData();
+// }, []);
+
+//   return (
+
+//     <>
+//       {/* HERO TOP BAR */}
+//       <div className="bg-white h-[70px] w-full flex items-center justify-center relative overflow-hidden">
+//         <div className="absolute inset-0 bg-gradient-to-r from-emerald-300/20 via-cyan-300/20 to-blue-300/20 blur-2xl" />
+//         <div className="relative text-center w-full text-5xl font-extrabold tracking-wide bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+//           DxAssist
+//         </div>
+//       </div>
+
 "use client";
-import Image from "next/image";
-import GoogleSignButton from "./components/GoogleSignButton";
+import React, { Suspense, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { use, useEffect } from "react";
+import { Environment } from "@react-three/drei";
+ import GoogleSignButton from "./components/GoogleSignButton";
+import { EffectComposer, Bloom, Vignette } from "@react-three/postprocessing";
+
+// IMPORT LOGIC: Step out of 'app' and into the 'dynamic' folder
+const Scene = dynamic(() => import("../dynamic/Scene"), { 
+  ssr: false 
+});
+
+const Canvas = dynamic(() => import("@react-three/fiber").then((m) => m.Canvas), { 
+  ssr: false 
+});
+
 export default function Home() {
-useEffect(() => {
-  const fetchData = async () => {
-    try {
-      const res = await fetch("/api/posts");
-
-      if (!res.ok) {
-        throw new Error("Failed to fetch data");
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("/api/posts");
+        if (!res.ok) throw new Error("Failed to fetch data");
+        const response = await res.json();
+        console.log(response);
+      } catch (error) {
+        console.error(error);
       }
-
-      const response = await res.json(); // ✅ await here
-      console.log(response);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  fetchData();
-}, []);
+    };
+    fetchData();
+  }, []);
 
   return (
-
     <>
-      {/* HERO TOP BAR */}
-      <div className="bg-white h-[70px] w-full flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-emerald-300/20 via-cyan-300/20 to-blue-300/20 blur-2xl" />
-        <div className="relative text-center w-full text-5xl font-extrabold tracking-wide bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
-          Hey
+    <main className="min-h-screen bg-black">
+    
+      <div className="bg-[#050505] h-[580px] w-full flex items-center justify-center relative overflow-hidden">
+     
+        <div className="absolute inset-0 bg-gradient-to-r from-emerald-300/10 via-cyan-300/10 to-blue-300/10 blur-3xl" />
+        
+        <div className="relative w-full h-full z-10">
+          
+          <Suspense fallback={<div className="flex h-full items-center justify-center text-white opacity-20">Initializing 3D...</div>}>
+            <Canvas camera={{ position: [0, 0, 5], fov: 35 }} dpr={[1, 2]}>
+              <Scene />
+              <Environment preset="studio" />
+              <EffectComposer disableNormalPass>
+                <Bloom intensity={0.6} luminanceThreshold={0.9} mipmapBlur />
+                <Vignette darkness={1.1} offset={0.1} />
+              </EffectComposer>
+            </Canvas>
+          </Suspense>
+        </div>
+
+      
+        <div className="absolute bottom-6 left-10 text-[9px] text-white/20 uppercase tracking-[0.5em] z-20">
+          Interface 2.0 // DxAssist Global
         </div>
       </div>
+
+   
+      <section className="py-20 text-center">
+        <p className="text-white/30 text-xs tracking-widest uppercase">
+          Precision Diagnostic Assistance
+        </p>
+      </section>
+    </main>
+  
+  
+
+
+
+
 
       <main>
         {/* HERO SECTION */}
