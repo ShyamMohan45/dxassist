@@ -348,6 +348,7 @@
 import Image from "next/image";
 import GoogleSignButton from "./components/GoogleSignButton";
 import Link from "next/link";
+
 import { use, useEffect } from "react";
 export default function Home() {
 useEffect(() => {
@@ -382,8 +383,8 @@ useEffect(() => {
 
       <main>
         {/* HERO SECTION */}
-        <section className="grid grid-cols-2 overflow-hidden relative">
-          {/* Glow background */}
+      <section className="grid grid-cols-2 overflow-hidden relative">
+  
           <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-emerald-500/20 rounded-full blur-3xl"></div>
 
           {/* LEFT */}

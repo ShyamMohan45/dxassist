@@ -276,6 +276,7 @@
     "supports-color": "^7.2.0",
     "supports-preserve-symlinks-flag": "^1.0.0",
     "tapable": "^2.3.0",
+    "three": "^0.182.0",
     "tinyglobby": "^0.2.15",
     "to-regex-range": "^5.0.1",
     "tr46": "^5.1.1",
