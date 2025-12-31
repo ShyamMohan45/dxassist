@@ -298,36 +298,28 @@ export default function Navbar() {
           </Link>
         </li>
 
+<li>
+  <Link href="/login">Login</Link>
+</li>
+<li>
+  <Link href="/signup">Signup</Link>
+</li>
         {/* 🌍 GOOGLE TRANSLATE BOX */}
         <li className="px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/10 backdrop-blur">
           <div id="google_translate_element" />
         </li>
 
-        {/* AUTH */}
-        {user ? (
-          <>
-            <li className="text-emerald-400">Hi, {user.name}</li>
-            <li>
-              <button
-                onClick={handleLogout}
-                className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600 transition"
-              >
-                Sign Out
-              </button>
-            </li>
-          </>
-        ) : (
-          <>
-            <li><Link href="/login">Login</Link></li>
-            <li><Link href="/signup">Signup</Link></li>
-          </>
-        )}
+      
+
+        
 
         {/* THEME */}
         <li className="hover:scale-125 transition">
           <ThemeToggle />
         </li>
       </ul>
+
+            
     </nav>
   )
 }

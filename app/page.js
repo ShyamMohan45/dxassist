@@ -2,8 +2,10 @@
 
 import { Canvas } from "@react-three/fiber"
 import { Suspense, useEffect } from "react"
-import Scene from "@/dynamic/Scene"
-import GoogleSignButton from "@/app/components/GoogleSignButton"
+import Scene from "../dynamic/Scene"
+
+import GoogleSignButton from "./components/GoogleSignButton"
+
 import Link from "next/link"
 import { div } from "prelude-ls"
 
