@@ -275,7 +275,7 @@ export default function Navbar() {
       {/* NAV */}
       <ul className="relative flex items-center gap-10 text-sm font-semibold">
         {[
-          { name: "Patient Queue", href: "/templates" },
+          { name: "dashboard", href: "/dashboard" },
           { name: "Clinical Analysis", href: "/diagnostics" },
           { name: "Medical Knowledge Base", href: "/history" },
         ].map((item) => (
