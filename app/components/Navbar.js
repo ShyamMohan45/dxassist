@@ -298,12 +298,41 @@ export default function Navbar() {
           </Link>
         </li>
 
-<li>
+{/* <li>
   <Link href="/login">Login</Link>
 </li>
 <li>
   <Link href="/signup">Signup</Link>
-</li>
+</li> */}
+
+{user ? (
+  <>
+    <li className="opacity-90">
+       <span className="font-bold">{user.name}</span>
+    </li>
+
+    <li>
+      <button
+        onClick={handleLogout}
+        className="hover:opacity-80 transition"
+      >
+        Logout
+      </button>
+    </li>
+  </>
+) : (
+  <>
+    <li>
+      <Link href="/login">Login</Link>
+    </li>
+    <li>
+      <Link href="/signup">Signup</Link>
+    </li>
+  </>
+)}
+
+
+
         {/* 🌍 GOOGLE TRANSLATE BOX */}
         <li className="px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/10 backdrop-blur">
           <div id="google_translate_element" />

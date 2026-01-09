@@ -1,15 +1,52 @@
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
+// import { NextResponse } from "next/server";
+
+// export async function GET() {
+//   const cookieStore = await cookies(); // ✅ MUST await
+//   const userCookie = cookieStore.get("user");
+
+//   if (!userCookie) {
+//     return NextResponse.json({ user: null });
+//   }
+
+//   return NextResponse.json({
+//     user: JSON.parse(userCookie.value),
+//   });
+// }
+// import { NextResponse } from "next/server";
+// import { cookies } from "next/headers";
+
+// export async function GET() {
+//   const cookieStore = cookies();
+//   const userCookie = cookieStore.get("user");
+
+//   if (!userCookie) {
+//     return NextResponse.json({ user: null });
+//   }
+
+//   try {
+//     const user = JSON.parse(userCookie.value);
+//     return NextResponse.json({ user });
+//   } catch {
+//     return NextResponse.json({ user: null });
+//   }
+// }
 import { NextResponse } from "next/server";
+import { cookies } from "next/headers";
 
 export async function GET() {
-  const cookieStore = await cookies(); // ✅ MUST await
+  // ✅ MUST AWAIT cookies() in Next.js 15
+  const cookieStore = await cookies();
   const userCookie = cookieStore.get("user");
 
   if (!userCookie) {
     return NextResponse.json({ user: null });
   }
 
-  return NextResponse.json({
-    user: JSON.parse(userCookie.value),
-  });
+  try {
+    const user = JSON.parse(userCookie.value);
+    return NextResponse.json({ user });
+  } catch {
+    return NextResponse.json({ user: null });
+  }
 }
