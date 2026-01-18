@@ -1,13 +1,24 @@
-import { NextResponse } from "next/server";
+// import { NextResponse } from "next/server";
+
+// export async function POST() {
+//   const response = NextResponse.json({ success: true });
+
+//   response.cookies.set("user", "", {
+//     httpOnly: true,
+//     path: "/",
+//     maxAge: 0,
+//   });
+
+//   return response;
+// }
+
+import { cookies } from "next/headers"
+import { NextResponse } from "next/server"
 
 export async function POST() {
-  const response = NextResponse.json({ success: true });
+  const cookieStore = await cookies()   // ✅ await
+  cookieStore.delete("auth")            // ✅ safe
 
-  response.cookies.set("user", "", {
-    httpOnly: true,
-    path: "/",
-    maxAge: 0,
-  });
-
-  return response;
+  return NextResponse.json({ success: true })
 }
+

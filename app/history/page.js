@@ -263,13 +263,787 @@
 //     </main>
 //   )
 // }
+
+
+
+
+
+
+
+
+
+
+// "use client"
+
+// import { useEffect, useRef, useState } from "react"
+// import { useRouter } from "next/navigation"
+// import { useAuth } from "../context/AuthContext"
+
+
+
+// export default function KnowledgeBasePage() {
+//   const router = useRouter()
+//   const { user, loading } = useAuth()
+//   const [query, setQuery] = useState("")
+
+//   const root = useRef(null)
+//   const [scroll, setScroll] = useState(0)
+
+//   /* ================= SCROLL TRACK ================= */
+//   useEffect(() => {
+//     const onScroll = () => setScroll(window.scrollY)
+//     window.addEventListener("scroll", onScroll)
+//     return () => window.removeEventListener("scroll", onScroll)
+//   }, [])
+
+//   /* ================= CURSOR LIGHT ================= */
+//   useEffect(() => {
+//     const move = (e) => {
+//       root.current?.style.setProperty("--x", `${e.clientX}px`)
+//       root.current?.style.setProperty("--y", `${e.clientY}px`)
+//     }
+//     window.addEventListener("mousemove", move)
+//     return () => window.removeEventListener("mousemove", move)
+//   }, [])
+
+//   return (
+//     <main
+//       ref={root}
+//       className="relative min-h-screen bg-[#f7fafc] text-slate-900 overflow-hidden"
+//     >
+//       {/* ================= CURSOR FIELD ================= */}
+//       <div
+//         className="
+//           pointer-events-none fixed inset-0 z-10
+//           bg-[radial-gradient(600px_at_var(--x)_var(--y),rgba(45,212,191,0.15),transparent_65%)]
+//         "
+//       />
+
+//       {/* ================= HEADER ================= */}
+//       <section className="relative px-[10vw] pt-24 pb-32">
+//         <p className="text-xs tracking-[0.4em] text-teal-700 mb-6">
+//           CLINICAL KNOWLEDGE INFRASTRUCTURE
+//         </p>
+
+//         <h1 className="text-[5vw] leading-tight font-semibold max-w-5xl">
+//           Evidence-first medical intelligence,
+//           <br />
+//           <span className="text-slate-400">
+//             designed for clinical trust
+//           </span>
+//         </h1>
+
+//         <p className="mt-12 text-lg text-slate-600 max-w-2xl">
+//           This knowledge base powers DxAssist’s reasoning layer by retrieving,
+//           structuring, and validating medical literature before inference.
+//         </p>
+//       </section>
+
+//       {/* ================= SEARCH ================= */}
+//       <section className="px-[10vw] mb-32">
+//         <div className="relative">
+//           <input
+//             value={query}
+//             onChange={(e) => setQuery(e.target.value)}
+//             onKeyDown={(e) => {
+//               if (e.key === "Enter") {
+//                 if (!query.trim()) return
+
+//                 // wait until auth finishes
+//                 if (loading) return
+
+//                 if (!user) {
+//                   router.push("/login")
+//                 } else {
+//                   router.push(`/chat?q=${encodeURIComponent(query)}`)
+//                 }
+//               }
+//             }}
+//             placeholder="Search conditions, guidelines, biomarkers…"
+//             className="
+//               w-full bg-transparent border-b border-slate-300
+//               py-5 text-lg text-slate-800
+//               focus:outline-none focus:border-teal-500
+//               transition
+//             "
+//           />
+
+//           <span className="absolute right-0 top-1/2 -translate-y-1/2 text-sm text-slate-400">
+//             ↵ Enter
+//           </span>
+//         </div>
+
+
+
+
+
+//       </section>
+
+
+//       {/* ================= MICROPHONE below section ================= */} 
+
+// {/* this above section is for microphone section */}
+
+//       {/* ================= CONTENT ================= */}
+//       <section className="relative px-[10vw] grid grid-cols-12 gap-x-16 mt-16">
+//         {/* LEFT — SOURCES */}
+//         <div className="col-span-7 space-y-24">
+//           {[
+//             {
+//               title: "WHO Clinical Practice Guidelines",
+//               desc:
+//                 "Structured diagnostic criteria and treatment pathways for respiratory infections, validated across global populations.",
+//               tag: "Global Guideline",
+//             },
+//             {
+//               title: "Journal of Internal Medicine · 2023",
+//               desc:
+//                 "Comparative biomarker analysis for bacterial versus viral pneumonia using CRP, PCT, and imaging correlation.",
+//               tag: "Peer-reviewed",
+//             },
+//             {
+//               title: "ICMR Consensus Statements",
+//               desc:
+//                 "India-specific clinical recommendations adapted for local epidemiology and healthcare infrastructure.",
+//               tag: "National Advisory",
+//             },
+//           ].map((item, i) => (
+//             <article
+//               key={i}
+//               className="
+//                 relative pb-16 border-b border-slate-200
+//                 transition
+//               "
+//             >
+//               <h2 className="text-2xl font-medium mb-4">
+//                 {item.title}
+//               </h2>
+//               <p className="text-slate-600 max-w-xl leading-relaxed">
+//                 {item.desc}
+//               </p>
+
+//               <span className="inline-block mt-6 text-xs tracking-widest text-teal-700">
+//                 {item.tag.toUpperCase()}
+//               </span>
+//             </article>
+//           ))}
+//         </div>
+
+//         {/* RIGHT — STICKY REASONING */}
+//         <aside className="col-span-4 col-start-9 sticky top-32 h-fit">
+//           <p className="text-xs tracking-[0.4em] text-slate-500 mb-6">
+//             AI REASONING PIPELINE
+//           </p>
+
+//           <div className="space-y-8 text-slate-700">
+//             <p>
+//               Every response is generated only after relevant medical
+//               literature is retrieved and validated.
+//             </p>
+
+//             <p>
+//               This prevents hallucinations and ensures traceability from
+//               output back to source.
+//             </p>
+
+//             <div className="mt-10 space-y-4 text-sm">
+//               <p>✓ Literature retrieval</p>
+//               <p>✓ Contextual ranking</p>
+//               <p>✓ Evidence-linked inference</p>
+//               <p>✓ Audit-ready output</p>
+//             </div>
+//           </div>
+//         </aside>
+//       </section>
+
+//       {/* ================= FOOTER ================= */}
+//       <footer className="mt-40 pb-20 text-center text-xs text-slate-500">
+//         Retrieval-Augmented Generation ensures safety,
+//         transparency, and clinical accountability.
+//       </footer>
+//     </main>
+//   )
+// }
+
+// above main code
+
+
+
+
+// "use client"
+
+// import { useEffect, useRef, useState } from "react"
+// import { useRouter } from "next/navigation"
+// import { useAuth } from "../context/AuthContext"
+
+// export default function HistoryPage() {
+//   const router = useRouter()
+//   const { user, loading } = useAuth()
+
+//   /* ================= BASIC STATE ================= */
+//   const [query, setQuery] = useState("")
+//   const [recording, setRecording] = useState(false)
+//   const [status, setStatus] = useState("Tap mic to speak")
+
+//   /* ================= REFS ================= */
+//   const root = useRef(null)
+//   const mediaRecorderRef = useRef(null)
+//   const streamRef = useRef(null)
+
+//   /* ================= SCROLL TRACK ================= */
+//   useEffect(() => {
+//     const onScroll = () => {}
+//     window.addEventListener("scroll", onScroll)
+//     return () => window.removeEventListener("scroll", onScroll)
+//   }, [])
+
+//   /* ================= CURSOR LIGHT ================= */
+//   useEffect(() => {
+//     const move = (e) => {
+//       root.current?.style.setProperty("--x", `${e.clientX}px`)
+//       root.current?.style.setProperty("--y", `${e.clientY}px`)
+//     }
+//     window.addEventListener("mousemove", move)
+//     return () => window.removeEventListener("mousemove", move)
+//   }, [])
+
+//   /* ================= MIC HANDLER ================= */
+//   const handleMicClick = async () => {
+//     if (recording) return
+
+//     setRecording(true)
+//     setStatus("🎤 Listening... Speak now")
+
+//     try {
+//       const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+//       streamRef.current = stream
+
+//       const mimeType = MediaRecorder.isTypeSupported("audio/webm;codecs=opus")
+//         ? "audio/webm;codecs=opus"
+//         : "audio/ogg;codecs=opus"
+
+//       const mediaRecorder = new MediaRecorder(stream, { mimeType })
+//       mediaRecorderRef.current = mediaRecorder
+
+//       const chunks = []
+
+//       mediaRecorder.ondataavailable = (e) => {
+//         if (e.data.size > 0) chunks.push(e.data)
+//       }
+
+//       mediaRecorder.onstop = async () => {
+//         setStatus("⏳ Processing...")
+
+//         const audioBlob = new Blob(chunks, { type: mimeType })
+//         await sendAudioToBackend(audioBlob)
+
+//         stream.getTracks().forEach((t) => t.stop())
+//         setRecording(false)
+//         setStatus("✅ Ready for next question")
+//       }
+
+//       mediaRecorder.start()
+
+//       setTimeout(() => {
+//         if (mediaRecorder.state !== "inactive") mediaRecorder.stop()
+//       }, 8000)
+//     } catch (err) {
+//       console.error("Mic error:", err)
+//       setStatus("❌ Microphone access failed")
+//       setRecording(false)
+//     }
+//   }
+
+//   /* ================= SEND AUDIO ================= */
+//   const sendAudioToBackend = async (audioBlob) => {
+//     try {
+//       const formData = new FormData()
+//       formData.append("file", audioBlob, "recording.webm")
+
+//       const res = await fetch("http://127.0.0.1:8000/voice-chat", {
+//         method: "POST",
+//         body: formData,
+//       })
+
+//       if (!res.ok) throw new Error(`Server error ${res.status}`)
+
+//       const data = await res.json()
+
+//       sessionStorage.setItem("voice_question", data.question)
+//       sessionStorage.setItem("voice_answer", data.answer)
+
+//       router.push(
+//         `/history/voice-result?question=${encodeURIComponent(
+//           data.question
+//         )}&answer=${encodeURIComponent(data.answer)}`
+//       )
+//     } catch (err) {
+//       console.error("Backend error:", err)
+//       setStatus("❌ Backend error")
+//     }
+//   }
+
+//   /* ================= RENDER ================= */
+//   return (
+//     <main
+//       ref={root}
+//       className="relative min-h-screen bg-[#f7fafc] text-slate-900 overflow-hidden"
+//     >
+//       {/* ================= CURSOR GLOW ================= */}
+//       <div
+//         className="
+//           pointer-events-none fixed inset-0 z-10
+//           bg-[radial-gradient(600px_at_var(--x)_var(--y),rgba(45,212,191,0.15),transparent_65%)]
+//         "
+//       />
+
+//       {/* ================= HEADER ================= */}
+//       <section className="relative px-[10vw] pt-24 pb-32">
+//         <p className="text-xs tracking-[0.4em] text-teal-700 mb-6">
+//           CLINICAL KNOWLEDGE INFRASTRUCTURE
+//         </p>
+
+//         <h1 className="text-[5vw] leading-tight font-semibold max-w-5xl">
+//           Evidence-first medical intelligence,
+//           <br />
+//           <span className="text-slate-400">designed for clinical trust</span>
+//         </h1>
+
+//         <p className="mt-12 text-lg text-slate-600 max-w-2xl">
+//           This knowledge base powers DxAssist’s reasoning layer by retrieving,
+//           structuring, and validating medical literature before inference.
+//         </p>
+//       </section>
+
+//       {/* ================= SEARCH ================= */}
+//       <section className="px-[10vw] mb-32">
+//         <div className="relative">
+//           <input
+//             value={query}
+//             onChange={(e) => setQuery(e.target.value)}
+//             onKeyDown={(e) => {
+//               if (e.key === "Enter") {
+//                 if (!query.trim()) return
+//                 if (loading) return
+//                 if (!user) router.push("/login")
+//                 else router.push(`/chat?q=${encodeURIComponent(query)}`)
+//               }
+//             }}
+//             placeholder="Search conditions, guidelines, biomarkers…"
+//             className="
+//               w-full bg-transparent border-b border-slate-300
+//               py-5 text-lg text-slate-800
+//               focus:outline-none focus:border-teal-500
+//               transition
+//             "
+//           />
+//           <span className="absolute right-0 top-1/2 -translate-y-1/2 text-sm text-slate-400">
+//             ↵ Enter
+//           </span>
+//         </div>
+//       </section>
+
+//       {/* ================= MICROPHONE ================= */}
+//       <section className="px-[10vw] py-8 bg-transparent">
+//         <div className="max-w-xl mx-auto text-center">
+//           <p className="text-sm text-slate-500 mb-4">Ask using voice</p>
+
+//           <button
+//             onClick={handleMicClick}
+//             disabled={recording}
+//             type="button"
+//             className={`mx-auto w-14 h-14 flex items-center justify-center rounded-full transition ${
+//               recording
+//                 ? "text-red-600 animate-pulse scale-110"
+//                 : "text-teal-600 hover:text-teal-700"
+//             }`}
+//           >
+//             🎤
+//           </button>
+
+//           <p className="mt-2 text-xs text-slate-400">{status}</p>
+//         </div>
+//       </section>
+
+//       {/* ================= CONTENT ================= */}
+//       <section className="relative px-[10vw] grid grid-cols-12 gap-x-16 mt-16">
+//         <div className="col-span-7 space-y-24">
+//           {[
+//             {
+//               title: "WHO Clinical Practice Guidelines",
+//               desc:
+//                 "Structured diagnostic criteria and treatment pathways for respiratory infections, validated across global populations.",
+//               tag: "Global Guideline",
+//             },
+//             {
+//               title: "Journal of Internal Medicine · 2023",
+//               desc:
+//                 "Comparative biomarker analysis for bacterial versus viral pneumonia using CRP, PCT, and imaging correlation.",
+//               tag: "Peer-reviewed",
+//             },
+//             {
+//               title: "ICMR Consensus Statements",
+//               desc:
+//                 "India-specific clinical recommendations adapted for local epidemiology and healthcare infrastructure.",
+//               tag: "National Advisory",
+//             },
+//           ].map((item, i) => (
+//             <article
+//               key={i}
+//               className="relative pb-16 border-b border-slate-200"
+//             >
+//               <h2 className="text-2xl font-medium mb-4">{item.title}</h2>
+//               <p className="text-slate-600 max-w-xl leading-relaxed">
+//                 {item.desc}
+//               </p>
+//               <span className="inline-block mt-6 text-xs tracking-widest text-teal-700">
+//                 {item.tag.toUpperCase()}
+//               </span>
+//             </article>
+//           ))}
+//         </div>
+
+//         <aside className="col-span-4 col-start-9 sticky top-32 h-fit">
+//           <p className="text-xs tracking-[0.4em] text-slate-500 mb-6">
+//             AI REASONING PIPELINE
+//           </p>
+
+//           <div className="space-y-8 text-slate-700">
+//             <p>
+//               Every response is generated only after relevant medical literature
+//               is retrieved and validated.
+//             </p>
+//             <p>
+//               This prevents hallucinations and ensures traceability from output
+//               back to source.
+//             </p>
+//           </div>
+//         </aside>
+//       </section>
+
+//       {/* ================= FOOTER ================= */}
+//       <footer className="mt-40 pb-20 text-center text-xs text-slate-500">
+//         Retrieval-Augmented Generation ensures safety, transparency, and clinical
+//         accountability.
+//       </footer>
+//     </main>
+//   )
+// }
+
+
+
+
+
+
+
+
+
+
+
+// "use client"
+
+// import { useEffect, useRef, useState } from "react"
+// import { useRouter } from "next/navigation"
+// import { useAuth } from "../context/AuthContext"
+
+// export default function KnowledgeBasePage() {
+//   const router = useRouter()
+//   const { user, loading } = useAuth()
+//   const [query, setQuery] = useState("")
+
+//   const root = useRef(null)
+//   const [scroll, setScroll] = useState(0)
+
+//   /* ================= MICROPHONE STATE & LOGIC ================= */
+//   const mediaRecorderRef = useRef(null)
+//   const audioChunksRef = useRef([])
+//   const [recording, setRecording] = useState(false)
+
+//   const startRecording = async () => {
+//     if (loading) return
+
+//     if (!user) {
+//       router.push("/login")
+//       return
+//     }
+
+//     const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+//     const recorder = new MediaRecorder(stream)
+
+//     audioChunksRef.current = []
+
+//     recorder.ondataavailable = (e) => {
+//       audioChunksRef.current.push(e.data)
+//     }
+
+//     recorder.onstop = async () => {
+//       const audioBlob = new Blob(audioChunksRef.current, {
+//         type: "audio/webm",
+//       })
+
+//       const formData = new FormData()
+//       formData.append("file", audioBlob)
+
+//       const res = await fetch("http://localhost:8000/api/speech", {
+//         method: "POST",
+//         body: formData,
+//       })
+
+//       const data = await res.json()
+
+//       console.log("User:", data.user)
+//       console.log("AI:", data.reply)
+
+//       // show AI reply in search box (optional but useful)
+//       setQuery(data.reply || "")
+//     }
+
+//     recorder.start()
+//     mediaRecorderRef.current = recorder
+//     setRecording(true)
+//   }
+
+//   const stopRecording = () => {
+//     mediaRecorderRef.current?.stop()
+//     setRecording(false)
+//   }
+
+//   /* ================= SCROLL TRACK ================= */
+//   useEffect(() => {
+//     const onScroll = () => setScroll(window.scrollY)
+//     window.addEventListener("scroll", onScroll)
+//     return () => window.removeEventListener("scroll", onScroll)
+//   }, [])
+
+//   /* ================= CURSOR LIGHT ================= */
+//   useEffect(() => {
+//     const move = (e) => {
+//       root.current?.style.setProperty("--x", `${e.clientX}px`)
+//       root.current?.style.setProperty("--y", `${e.clientY}px`)
+//     }
+//     window.addEventListener("mousemove", move)
+//     return () => window.removeEventListener("mousemove", move)
+//   }, [])
+
+//   return (
+//     <main
+//       ref={root}
+//       className="relative min-h-screen bg-[#f7fafc] text-slate-900 overflow-hidden"
+//     >
+//       {/* ================= CURSOR FIELD ================= */}
+//       <div
+//         className="
+//           pointer-events-none fixed inset-0 z-10
+//           bg-[radial-gradient(600px_at_var(--x)_var(--y),rgba(45,212,191,0.15),transparent_65%)]
+//         "
+//       />
+
+//       {/* ================= HEADER ================= */}
+//       <section className="relative px-[10vw] pt-24 pb-32">
+//         <p className="text-xs tracking-[0.4em] text-teal-700 mb-6">
+//           CLINICAL KNOWLEDGE INFRASTRUCTURE
+//         </p>
+
+//         <h1 className="text-[5vw] leading-tight font-semibold max-w-5xl">
+//           Evidence-first medical intelligence,
+//           <br />
+//           <span className="text-slate-400">designed for clinical trust</span>
+//         </h1>
+
+//         <p className="mt-12 text-lg text-slate-600 max-w-2xl">
+//           This knowledge base powers DxAssist’s reasoning layer by retrieving,
+//           structuring, and validating medical literature before inference.
+//         </p>
+//       </section>
+
+//       {/* ================= SEARCH ================= */}
+//       <section className="px-[10vw] mb-32">
+//         <div className="relative">
+//           <input
+//             value={query}
+//             onChange={(e) => setQuery(e.target.value)}
+//             onKeyDown={(e) => {
+//               if (e.key === "Enter") {
+//                 if (!query.trim()) return
+//                 if (loading) return
+
+//                 if (!user) {
+//                   router.push("/login")
+//                 } else {
+//                   router.push(`/chat?q=${encodeURIComponent(query)}`)
+//                 }
+//               }
+//             }}
+//             placeholder="Search conditions, guidelines, biomarkers…"
+//             className="
+//               w-full bg-transparent border-b border-slate-300
+//               py-5 text-lg text-slate-800
+//               focus:outline-none focus:border-teal-500
+//               transition
+//             "
+//           />
+
+//           <span className="absolute right-0 top-1/2 -translate-y-1/2 text-sm text-slate-400">
+//             ↵ Enter
+//           </span>
+//         </div>
+
+//         {/* ================= MICROPHONE BUTTON ================= */}
+//         <div className="mt-6">
+//           <button
+//             onClick={recording ? stopRecording : startRecording}
+//             className="text-teal-600 text-sm"
+//           >
+//             {recording ? "Stop 🎙️" : "Speak 🎤"}
+//           </button>
+//         </div>
+//       </section>
+
+//       {/* ================= CONTENT ================= */}
+//       <section className="relative px-[10vw] grid grid-cols-12 gap-x-16 mt-16">
+//         {/* LEFT — SOURCES */}
+//         <div className="col-span-7 space-y-24">
+//           {[
+//             {
+//               title: "WHO Clinical Practice Guidelines",
+//               desc:
+//                 "Structured diagnostic criteria and treatment pathways for respiratory infections, validated across global populations.",
+//               tag: "Global Guideline",
+//             },
+//             {
+//               title: "Journal of Internal Medicine · 2023",
+//               desc:
+//                 "Comparative biomarker analysis for bacterial versus viral pneumonia using CRP, PCT, and imaging correlation.",
+//               tag: "Peer-reviewed",
+//             },
+//             {
+//               title: "ICMR Consensus Statements",
+//               desc:
+//                 "India-specific clinical recommendations adapted for local epidemiology and healthcare infrastructure.",
+//               tag: "National Advisory",
+//             },
+//           ].map((item, i) => (
+//             <article
+//               key={i}
+//               className="relative pb-16 border-b border-slate-200"
+//             >
+//               <h2 className="text-2xl font-medium mb-4">{item.title}</h2>
+//               <p className="text-slate-600 max-w-xl leading-relaxed">
+//                 {item.desc}
+//               </p>
+
+//               <span className="inline-block mt-6 text-xs tracking-widest text-teal-700">
+//                 {item.tag.toUpperCase()}
+//               </span>
+//             </article>
+//           ))}
+//         </div>
+
+//         {/* RIGHT — STICKY REASONING */}
+//         <aside className="col-span-4 col-start-9 sticky top-32 h-fit">
+//           <p className="text-xs tracking-[0.4em] text-slate-500 mb-6">
+//             AI REASONING PIPELINE
+//           </p>
+
+//           <div className="space-y-8 text-slate-700">
+//             <p>
+//               Every response is generated only after relevant medical literature
+//               is retrieved and validated.
+//             </p>
+
+//             <p>
+//               This prevents hallucinations and ensures traceability from output
+//               back to source.
+//             </p>
+
+//             <div className="mt-10 space-y-4 text-sm">
+//               <p>✓ Literature retrieval</p>
+//               <p>✓ Contextual ranking</p>
+//               <p>✓ Evidence-linked inference</p>
+//               <p>✓ Audit-ready output</p>
+//             </div>
+//           </div>
+//         </aside>
+//       </section>
+
+//       {/* ================= FOOTER ================= */}
+//       <footer className="mt-40 pb-20 text-center text-xs text-slate-500">
+//         Retrieval-Augmented Generation ensures safety, transparency, and clinical
+//         accountability.
+//       </footer>
+//     </main>
+//   )
+// }
+
+
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
+import { useAuth } from "../context/AuthContext"
 
 export default function KnowledgeBasePage() {
+  const router = useRouter()
+  const { user, loading } = useAuth()
+  const [query, setQuery] = useState("")
+
   const root = useRef(null)
   const [scroll, setScroll] = useState(0)
+
+  /* ================= MICROPHONE STATE & LOGIC ================= */
+  const mediaRecorderRef = useRef(null)
+  const audioChunksRef = useRef([])
+  const [recording, setRecording] = useState(false)
+
+  const startRecording = async () => {
+    if (loading) return
+
+    if (!user) {
+      router.push("/login")
+      return
+    }
+
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
+    const recorder = new MediaRecorder(stream)
+
+    audioChunksRef.current = []
+
+    recorder.ondataavailable = (e) => {
+      audioChunksRef.current.push(e.data)
+    }
+
+    recorder.onstop = async () => {
+      const audioBlob = new Blob(audioChunksRef.current, {
+        type: "audio/webm",
+      })
+
+      const formData = new FormData()
+      formData.append("file", audioBlob)
+
+      const res = await fetch("http://localhost:8000/api/speech", {
+        method: "POST",
+        body: formData,
+      })
+
+      const data = await res.json()
+
+      // 👉 Redirect to NEW PAGE with question + answer
+      router.push(
+        `/voice-result?question=${encodeURIComponent(
+          data.user || ""
+        )}&answer=${encodeURIComponent(data.reply || "")}`
+      )
+    }
+
+    recorder.start()
+    mediaRecorderRef.current = recorder
+    setRecording(true)
+  }
+
+  const stopRecording = () => {
+    mediaRecorderRef.current?.stop()
+    setRecording(false)
+  }
 
   /* ================= SCROLL TRACK ================= */
   useEffect(() => {
@@ -325,6 +1099,20 @@ export default function KnowledgeBasePage() {
       <section className="px-[10vw] mb-32">
         <div className="relative">
           <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                if (!query.trim()) return
+                if (loading) return
+
+                if (!user) {
+                  router.push("/login")
+                } else {
+                  router.push(`/chat?q=${encodeURIComponent(query)}`)
+                }
+              }
+            }}
             placeholder="Search conditions, guidelines, biomarkers…"
             className="
               w-full bg-transparent border-b border-slate-300
@@ -333,14 +1121,25 @@ export default function KnowledgeBasePage() {
               transition
             "
           />
+
           <span className="absolute right-0 top-1/2 -translate-y-1/2 text-sm text-slate-400">
             ↵ Enter
           </span>
         </div>
+
+        {/* ================= MICROPHONE BUTTON ================= */}
+        <div className="mt-6">
+          <button
+            onClick={recording ? stopRecording : startRecording}
+            className="text-teal-600 text-sm"
+          >
+            {recording ? "Stop 🎙️" : "Speak 🎤"}
+          </button>
+        </div>
       </section>
 
       {/* ================= CONTENT ================= */}
-      <section className="relative px-[10vw] grid grid-cols-12 gap-x-16">
+      <section className="relative px-[10vw] grid grid-cols-12 gap-x-16 mt-16">
         {/* LEFT — SOURCES */}
         <div className="col-span-7 space-y-24">
           {[

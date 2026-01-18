@@ -954,12 +954,27 @@
 // }
 "use client"
 
+import { useRouter } from "next/navigation"
+import { useAuth } from "@/app/context/AuthContext"
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 
 export default function Home() {
   const root = useRef(null)
   const [scrollY, setScrollY] = useState(0)
+
+  const router = useRouter()
+const { user, loading } = useAuth()
+
+const handleEnterDxAssist = () => {
+  if (loading) return
+
+  if (!user) {
+    router.push("/login")
+  } else {
+    router.push("/diagnostics/analyze")
+  }
+}
 
   /* ================= SCROLL ================= */
   useEffect(() => {
@@ -1110,8 +1125,8 @@ export default function Home() {
 
 
           {/* ===== CTA (NO BOX) ===== */}
-           <Link href="/login">
-                   <button
+           
+                   {/* <button onClick={handleEnterDxAssist}
             className="
               group relative text-2xl uppercase tracking-widest
               text-white/80 hover:text-white
@@ -1126,8 +1141,49 @@ export default function Home() {
                 transition-all duration-500
               "
             />
+          </button> */}
+
+
+          <p>if you want to summarisation of your unstructured clinical notes then click below the button the Enter dxassist</p>
+          <button
+            onClick={handleEnterDxAssist}
+            disabled={loading}
+            className="
+              group relative text-2xl uppercase tracking-widest
+              text-white/80 hover:text-white
+              transition-all duration-500
+              disabled:opacity-40 disabled:cursor-not-allowed
+            "
+          >
+            {loading ? "Checking session…" : "Enter DxAssist"}
+            <span
+              className="
+                block h-[1px] bg-white w-0
+                group-hover:w-full
+                transition-all duration-500
+              "
+            />
           </button>
-          </Link>
+            <section className="mt-10">
+          <p>if you get diagnosis of your skin disease by uploading image then</p>
+                    <button className="
+              group relative text-2xl uppercase tracking-widest
+              text-white/80 hover:text-white
+              transition-all duration-500
+              disabled:opacity-40 disabled:cursor-not-allowed
+            ">Click Here
+                      <span
+              className="
+                block h-[1px] bg-white w-0
+                group-hover:w-full
+                transition-all duration-500
+              "
+            />
+                    </button>
+                    </section>
+
+
+          
 </div>
       </section>
 
