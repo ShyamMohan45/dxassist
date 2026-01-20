@@ -29,7 +29,7 @@
 //       );
 //     }
 
-//     // ✅ SET COOKIE
+//     
 //     const response = NextResponse.json({
 //       success: true,
 //       user: { name: user.name, email: user.email }

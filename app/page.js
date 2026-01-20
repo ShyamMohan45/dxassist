@@ -20,11 +20,11 @@ export default function Home() {
 
   return (
     <>
-      {/* ================= HERO 3D SECTION ================= */}
+      
       <main className="min-h-screen bg-gradient-to-b from-[#020617] via-[#030712] to-black">
         <div className="relative h-[550px] overflow-hidden">
 
-          {/* SUBTLE GLOW */}
+         
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(16,185,129,0.18),transparent_60%)]" />
 
           <Suspense
@@ -46,12 +46,12 @@ export default function Home() {
 
 <div className="relative flex flex-col items-center justify-center py-28 text-center overflow-hidden">
 
-  {/* BACKGROUND AMBIENCE */}
+
   <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
     <div className="w-[520px] h-[180px] bg-emerald-400/10 blur-[120px] rounded-full animate-pulse" />
   </div>
 
-  {/* MICRO BADGE */}
+  
   <div className="relative mb-6 flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md">
     <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
     <span className="text-[11px] uppercase tracking-[0.3em] text-white/70">
@@ -59,7 +59,7 @@ export default function Home() {
     </span>
   </div>
 
-  {/* PRIMARY STATEMENT */}
+ 
   <h2 className="relative text-white text-3xl md:text-4xl font-semibold leading-tight max-w-2xl">
     Precision Diagnostic Assistance
     <span className="block text-white/40 font-normal text-lg mt-3">
@@ -67,27 +67,24 @@ export default function Home() {
     </span>
   </h2>
 
-  {/* DIVIDER */}
+ 
   <div className="mt-8 mb-10 flex items-center gap-4">
     <span className="h-px w-14 bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent" />
     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400/80" />
     <span className="h-px w-14 bg-gradient-to-r from-transparent via-emerald-400/60 to-transparent" />
   </div>
 
-  {/* SUPPORTING COPY */}
+ 
   <p className="relative max-w-xl text-white/45 text-sm leading-relaxed">
     Dx Assist combines advanced generative AI with evidence-backed medical
     knowledge to transform unstructured clinical data into clear, actionable
     insights — without disrupting existing workflows.
   </p>
 
-  {/* FEATURE HIGHLIGHTS */}
- {/* FEATURE HIGHLIGHTS – PREMIUM VERSION */}
-{/* ADVANCED AI PIPELINE */}
-{/* ================= ADVANCED AI PIPELINE ================= */}
+ 
 <div className="mt-24 max-w-5xl mx-auto relative">
 
-  {/* ANIMATED DATA FLOW LINE */}
+
   <div className="absolute left-7 top-0 bottom-0 w-px 
                   bg-gradient-to-b from-transparent via-cyan-400/40 to-transparent">
     <div className="absolute left-[-2px] top-0 h-8 w-[5px] 
@@ -128,7 +125,7 @@ export default function Home() {
       key={i}
       className="relative pl-24 py-12 group"
     >
-      {/* STEP NODE */}
+      
       <div className="absolute left-0 top-12 w-14 h-14 rounded-full
                       border border-cyan-400/40
                       bg-cyan-400/10
@@ -139,7 +136,7 @@ export default function Home() {
         <span className="text-[10px] opacity-70">NODE</span>
       </div>
 
-      {/* CONTENT */}
+      
       <div className="relative">
         <div className="flex flex-wrap items-center gap-4 mb-3">
           <h3 className="text-white text-lg font-medium tracking-wide">
@@ -159,7 +156,7 @@ export default function Home() {
           {item.desc}
         </p>
 
-        {/* HOVER TECH DETAIL */}
+     
         <p className="mt-3 text-cyan-300/0 text-xs font-mono leading-relaxed
                       group-hover:text-cyan-300/60 transition">
           ↳ System status: operational · latency &lt; 120ms · monitored
@@ -171,23 +168,22 @@ export default function Home() {
 </div>
       </main>
 
-      {/* ================= SPLIT HERO SECTION ================= */}
+      
       <section className="grid grid-cols-2 overflow-hidden relative">
-{/* BACKGROUND AURA */}
-{/* SOFT BACKGROUND */}
+
 <div className="relative overflow-hidden bg-gradient-to-br 
                 from-[#f6fbfa] via-[#eef7f6] to-[#f0f4f9]">
 
-  {/* BACKGROUND AURA */}
+
   <div className="absolute -top-52 -left-52 w-[600px] h-[600px] 
                   bg-gradient-to-br from-emerald-400/20 via-cyan-400/10 to-transparent 
                   rounded-full blur-[160px]" />
 
-  {/* LEFT CONTENT */}
+
   <div className="relative z-10 h-[72vh] 
                   flex flex-col justify-center items-center text-center px-16">
 
-    {/* MICRO BADGE */}
+   
     <div className="mb-6 inline-flex items-center gap-3 
                     rounded-full border border-black/10 
                     bg-white/70 px-5 py-2 backdrop-blur-md">
@@ -197,7 +193,7 @@ export default function Home() {
       </span>
     </div>
 
-    {/* MAIN HEADING */}
+
     <h1 className="text-[4.5rem] leading-[1.05] font-semibold tracking-tight mb-8 text-slate-900">
       Enjoy care
       <span className="block bg-gradient-to-r from-emerald-500 via-cyan-500 to-teal-400 
@@ -206,26 +202,26 @@ export default function Home() {
       </span>
     </h1>
 
-    {/* DIVIDER */}
+    
     <div className="mb-8 flex items-center gap-4">
       <span className="h-px w-16 bg-gradient-to-r from-transparent via-emerald-400/70 to-transparent" />
       <span className="h-1.5 w-1.5 rounded-full bg-emerald-500/80" />
       <span className="h-px w-16 bg-gradient-to-r from-transparent via-emerald-400/70 to-transparent" />
     </div>
 
-    {/* PRIMARY DESCRIPTION */}
+   
     <p className="text-lg text-slate-700 max-w-xl leading-relaxed mb-6">
       DxAssist is an advanced clinical intelligence platform that transforms
       unstructured medical data into clear, evidence-grounded diagnostic insight.
     </p>
 
-    {/* SECONDARY TECH LINE */}
+    
     <p className="text-sm text-slate-500 max-w-lg leading-relaxed mb-10">
       Powered by retrieval-augmented generative models, probabilistic reasoning,
       and clinician-first safety architecture.
     </p>
 
-    {/* TECH STATS */}
+
     <div className="flex gap-10 text-left">
       {[
         { label: "Clinical Sources", value: "50K+" },
@@ -245,7 +241,7 @@ export default function Home() {
 </div>
 
 
-        {/* RIGHT VIDEO */}
+    
         <div className="relative h-[70vh] overflow-hidden group">
           <video
             src="/Hailuo_Video_A realistic cinematic healthca_456572131441737731 (1).mp4"
@@ -259,23 +255,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= AI ANALYSIS SECTION ================= */}
+     
 <section className="relative py-36  overflow-hidden">
 
-  {/* BACKGROUND LAYERS */}
+  
   <div className="absolute inset-0 bg-gradient-to-b from-[#f7fbfa] via-[#eef7f6] to-white" />
   <div className="absolute -top-40 right-[-10%] w-[600px] h-[600px] 
                   bg-emerald-400/15 rounded-full blur-[160px]" />
   <div className="absolute -bottom-40 left-[-10%] w-[600px] h-[600px] 
                   bg-cyan-400/10 rounded-full blur-[160px]" />
 
-  {/* CONTENT CONTAINER */}
+  
   <div className="relative max-w-6xl mx-auto rounded-[2.8rem] 
                   bg-white/70 backdrop-blur-2xl 
                   shadow-[0_30px_100px_rgba(0,0,0,0.12)] 
                   px-20 py-24">
 
-    {/* MICRO LABEL */}
+
     <div className="mb-8 flex justify-center">
       <span className="inline-flex items-center gap-3 rounded-full 
                        border border-emerald-500/20 
@@ -287,7 +283,7 @@ export default function Home() {
       </span>
     </div>
 
-    {/* HEADING */}
+
     <h2 className="text-center text-[3.2rem] leading-tight font-semibold text-slate-900 mb-6">
       How DxAssist understands
       <span className="block text-slate-500 font-normal mt-2">
@@ -295,36 +291,36 @@ export default function Home() {
       </span>
     </h2>
 
-    {/* SUBTEXT */}
+ 
     <p className="mx-auto max-w-2xl text-center text-slate-600 text-lg leading-relaxed mb-16">
       Our system processes unstructured clinical notes and patient data through
       a multi-stage AI reasoning pipeline designed for accuracy, traceability,
       and clinician trust.
     </p>
 
-    {/* VISUAL AI STAGE */}
+
     <div className="relative max-w-5xl mx-auto">
 
-      {/* FRAME */}
+    
       <div className="relative rounded-[2rem] border border-black/10 
                       bg-gradient-to-br from-white via-white to-emerald-50/40 
                       shadow-inner p-10">
 
-        {/* TOP TECH BAR */}
+   
         <div className="mb-6 flex items-center justify-between text-xs font-mono text-slate-500">
           <span>DxAssist · Analysis Engine</span>
           <span className="text-emerald-600">Status: Active</span>
         </div>
 
-        {/* MAIN VISUAL PLACEHOLDER */}
+       
         <div className="h-[360px] rounded-xl 
                         bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 
                         flex items-center justify-center relative overflow-hidden">
 
-          {/* GRID OVERLAY */}
+          
           <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-          {/* CENTER LABEL */}
+     
           <div className="relative z-10 text-center">
             <p className="text-emerald-400 text-sm tracking-widest uppercase mb-3">
               Live AI Reasoning
@@ -336,7 +332,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* TECH METRICS */}
+     
       <div className="mt-12 grid grid-cols-3 gap-8 text-center">
         {[
           { label: "Context Extraction", value: "Multi-modal" },
@@ -358,27 +354,25 @@ export default function Home() {
 </section>
 
 
-      {/* ================= MULTILINGUAL ================= */}
-{/* ================= GLOBAL MULTILINGUAL INTELLIGENCE ================= */}
 <section className="relative mt-32 overflow-hidden">
 
-  {/* BACKGROUND LAYERS */}
+
   <div className="absolute inset-0 bg-gradient-to-br 
                   from-[#f7fbfa] via-[#eef7f6] to-[#f1f5f9]" />
   <div className="absolute -top-40 left-1/2 -translate-x-1/2 
                   w-[700px] h-[700px] bg-emerald-400/15 
                   rounded-full blur-[180px]" />
 
-  {/* CONTAINER */}
+
   <div className="relative max-w-6xl mx-auto px-6">
 
-    {/* SYSTEM FRAME */}
+  
     <div className="relative rounded-[2.8rem] 
                     bg-white/70 backdrop-blur-2xl 
                     shadow-[0_30px_100px_rgba(0,0,0,0.12)] 
                     px-20 py-24">
 
-      {/* MICRO LABEL */}
+
       <div className="mb-10 flex justify-center">
         <span className="inline-flex items-center gap-3 
                          rounded-full border border-emerald-500/20 
@@ -390,7 +384,6 @@ export default function Home() {
         </span>
       </div>
 
-      {/* HEADING */}
       <h3 className="text-center text-[3rem] font-semibold 
                      leading-tight text-slate-900 mb-6">
         Built for clinicians
@@ -577,7 +570,7 @@ export default function Home() {
 
  <footer className="relative mt-40 overflow-hidden">
 
-  {/* PREMIUM DARK BACKGROUND */}
+
   <div className="absolute inset-0 bg-gradient-to-b 
                   from-[#020617] via-[#020b1a] to-[#01040b]" />
 

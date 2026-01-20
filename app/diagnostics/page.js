@@ -976,14 +976,14 @@ const handleEnterDxAssist = () => {
   }
 }
 
-  /* ================= SCROLL ================= */
+
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY)
     window.addEventListener("scroll", onScroll)
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  /* ================= CURSOR PRESENCE ================= */
+  
   useEffect(() => {
     const move = (e) => {
       root.current?.style.setProperty("--cx", `${e.clientX}px`)
@@ -998,7 +998,7 @@ const handleEnterDxAssist = () => {
       ref={root}
       className="relative bg-[#05070c] text-white overflow-hidden"
     >
-      {/* ================= CURSOR FIELD ================= */}
+      
       <div
         className="
           pointer-events-none fixed inset-0 z-10
@@ -1006,7 +1006,7 @@ const handleEnterDxAssist = () => {
         "
       />
 
-      {/* ================= SCENE 1 ================= */}
+     
       <section className="min-h-screen flex items-center px-[14vw]">
         <div className="max-w-5xl">
           <p className="text-[11px] tracking-[0.45em] text-white/40 mb-10">
@@ -1034,7 +1034,7 @@ const handleEnterDxAssist = () => {
         </div>
       </section>
 
-      {/* ================= SCENE 2 ================= */}
+      
       <section className="min-h-screen px-[14vw] flex items-center">
         <div className="w-full">
           <p className="text-[11px] tracking-[0.45em] text-white/40 mb-12">
@@ -1074,7 +1074,7 @@ const handleEnterDxAssist = () => {
         </div>
       </section>
 
-      {/* ================= SCENE 3 ================= */}
+      
       <section className="min-h-screen px-[14vw] flex items-center">
         <div className="grid grid-cols-12 w-full gap-y-20">
           <div className="col-span-4">
@@ -1108,7 +1108,7 @@ const handleEnterDxAssist = () => {
         </div>
       </section>
 
-      {/* ================= SCENE 4 ================= */}
+      
       <section className="min-h-screen px-[14vw] flex items-center">
         <div className="max-w-3xl">
           <p className="text-[11px] tracking-[0.45em] text-white/40 mb-8">
@@ -1124,7 +1124,7 @@ const handleEnterDxAssist = () => {
           </h2>
 
 
-          {/* ===== CTA (NO BOX) ===== */}
+         
            
                    {/* <button onClick={handleEnterDxAssist}
             className="
@@ -1187,7 +1187,7 @@ const handleEnterDxAssist = () => {
 </div>
       </section>
 
-      {/* ================= FOOTER ================= */}
+    
       <footer className="py-28 text-center text-xs text-white/35">
         DxAssist supports clinical decision-making.
         <br />

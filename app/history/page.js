@@ -990,7 +990,7 @@ export default function KnowledgeBasePage() {
   const root = useRef(null)
   const [scroll, setScroll] = useState(0)
 
-  /* ================= MICROPHONE STATE & LOGIC ================= */
+ 
   const mediaRecorderRef = useRef(null)
   const audioChunksRef = useRef([])
   const [recording, setRecording] = useState(false)
@@ -1027,7 +1027,7 @@ export default function KnowledgeBasePage() {
 
       const data = await res.json()
 
-      // 👉 Redirect to NEW PAGE with question + answer
+      
       router.push(
         `/voice-result?question=${encodeURIComponent(
           data.user || ""
@@ -1045,14 +1045,14 @@ export default function KnowledgeBasePage() {
     setRecording(false)
   }
 
-  /* ================= SCROLL TRACK ================= */
+
   useEffect(() => {
     const onScroll = () => setScroll(window.scrollY)
     window.addEventListener("scroll", onScroll)
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  /* ================= CURSOR LIGHT ================= */
+  
   useEffect(() => {
     const move = (e) => {
       root.current?.style.setProperty("--x", `${e.clientX}px`)
@@ -1067,7 +1067,7 @@ export default function KnowledgeBasePage() {
       ref={root}
       className="relative min-h-screen bg-[#f7fafc] text-slate-900 overflow-hidden"
     >
-      {/* ================= CURSOR FIELD ================= */}
+   
       <div
         className="
           pointer-events-none fixed inset-0 z-10
@@ -1075,7 +1075,7 @@ export default function KnowledgeBasePage() {
         "
       />
 
-      {/* ================= HEADER ================= */}
+      
       <section className="relative px-[10vw] pt-24 pb-32">
         <p className="text-xs tracking-[0.4em] text-teal-700 mb-6">
           CLINICAL KNOWLEDGE INFRASTRUCTURE
@@ -1095,7 +1095,6 @@ export default function KnowledgeBasePage() {
         </p>
       </section>
 
-      {/* ================= SEARCH ================= */}
       <section className="px-[10vw] mb-32">
         <div className="relative">
           <input
@@ -1127,7 +1126,7 @@ export default function KnowledgeBasePage() {
           </span>
         </div>
 
-        {/* ================= MICROPHONE BUTTON ================= */}
+        
         <div className="mt-6">
           <button
             onClick={recording ? stopRecording : startRecording}
@@ -1138,7 +1137,7 @@ export default function KnowledgeBasePage() {
         </div>
       </section>
 
-      {/* ================= CONTENT ================= */}
+     
       <section className="relative px-[10vw] grid grid-cols-12 gap-x-16 mt-16">
         {/* LEFT — SOURCES */}
         <div className="col-span-7 space-y-24">
@@ -1183,7 +1182,7 @@ export default function KnowledgeBasePage() {
           ))}
         </div>
 
-        {/* RIGHT — STICKY REASONING */}
+       
         <aside className="col-span-4 col-start-9 sticky top-32 h-fit">
           <p className="text-xs tracking-[0.4em] text-slate-500 mb-6">
             AI REASONING PIPELINE
@@ -1210,7 +1209,7 @@ export default function KnowledgeBasePage() {
         </aside>
       </section>
 
-      {/* ================= FOOTER ================= */}
+  
       <footer className="mt-40 pb-20 text-center text-xs text-slate-500">
         Retrieval-Augmented Generation ensures safety,
         transparency, and clinical accountability.

@@ -14,7 +14,7 @@
 //       [username, email, mobile, hashedPassword]
 //     );
 
-//     // ✅ SET COOKIE AFTER SIGNUP
+//     
 //     const response = NextResponse.json({
 //       success: true,
 //       user: { name: username, email }
@@ -48,11 +48,11 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { getPool } from "@/lib/db";
-import { createTables } from "@/lib/dbUtils"; // ✅ ADD THIS
+import { createTables } from "@/lib/dbUtils"; 
 
 export async function POST(req) {
   try {
-    // ✅ Ensure tables exist
+  
     await createTables();
 
     const { username, email, mobile, password } = await req.json();
@@ -73,7 +73,7 @@ export async function POST(req) {
       [username, email, mobile, hashedPassword]
     );
 
-    // ✅ Response with cookie
+   
     const response = NextResponse.json({
       success: true,
       user: {

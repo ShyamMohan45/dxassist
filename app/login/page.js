@@ -468,7 +468,7 @@ export default function LoginPage() {
       Login to your healthcare account
     </p>
 
-    {/* Email */}
+   
     <div className="mb-6">
       <label className="block text-xs text-gray-400 mb-1">
         Email Address
@@ -487,7 +487,7 @@ export default function LoginPage() {
       />
     </div>
 
-    {/* Password */}
+    
     <div className="mb-6">
       <label className="block text-xs text-gray-400 mb-1">
         Password

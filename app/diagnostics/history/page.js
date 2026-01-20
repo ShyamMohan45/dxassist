@@ -48,7 +48,7 @@ export default function PastAnalysesPage() {
             {new Date(a.created_at).toLocaleString()}
           </p>
 
-          {/* Summary */}
+       
           <h2 className="text-xl font-semibold">
             Clinical Summary
           </h2>
@@ -56,7 +56,7 @@ export default function PastAnalysesPage() {
             {a.summary}
           </p>
 
-          {/* Conditions */}
+        
           {Array.isArray(a.conditions) && a.conditions.length > 0 && (
             <>
               <h3 className="text-lg font-semibold mt-6">
@@ -71,7 +71,7 @@ export default function PastAnalysesPage() {
             </>
           )}
 
-          {/* Evidence */}
+        
           {Array.isArray(a.evidence) && a.evidence.length > 0 && (
             <>
               <h3 className="text-lg font-semibold mt-6">

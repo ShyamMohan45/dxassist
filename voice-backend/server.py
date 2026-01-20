@@ -32,13 +32,13 @@ llm_pipe = pipeline(
 
 @app.post("/api/speech")
 async def speech_api(file: UploadFile = File(...)):
-    # Save WebM temporarily
+    
     with tempfile.NamedTemporaryFile(delete=False, suffix=".webm") as tmp:
         tmp.write(await file.read())
         tmp_path = tmp.name
 
     try:
-        # Whisper handles WebM internally (via ffmpeg)
+        
         stt = stt_pipe(tmp_path)
         user_text = stt["text"]
 

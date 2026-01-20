@@ -148,7 +148,7 @@ export default function EmailOTPLogin() {
               We’ll send a one-time password to your email
             </p>
 
-            {/* Email */}
+            
             <div className="mb-6">
               <label className="block text-xs text-gray-400 mb-1">
                 Email Address
@@ -190,7 +190,7 @@ export default function EmailOTPLogin() {
               Check your email for the 6-digit code
             </p>
 
-            {/* OTP */}
+       
             <div className="mb-6">
               <label className="block text-xs text-gray-400 mb-1">
                 Verification Code

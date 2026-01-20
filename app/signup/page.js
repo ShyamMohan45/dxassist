@@ -588,10 +588,7 @@ export default function SignupPage() {
       return
     }
 
-    // ❌ DO NOT auto-login after signup
-    // ❌ DO NOT redirect to "/"
-
-    // ✅ Redirect to email verification page
+    
     router.push(`/login-email-otp?email=${encodeURIComponent(email)}`)
   }
 
@@ -609,7 +606,7 @@ export default function SignupPage() {
           Join our healthcare platform
         </p>
 
-        {/* Username */}
+      
         <div className="mb-6">
           <label className="block text-xs text-gray-400 mb-1">
             Username
@@ -621,7 +618,6 @@ export default function SignupPage() {
           />
         </div>
 
-        {/* Email */}
         <div className="mb-6">
           <label className="block text-xs text-gray-400 mb-1">
             Email Address
@@ -634,7 +630,7 @@ export default function SignupPage() {
           />
         </div>
 
-        {/* Mobile */}
+       
         <div className="mb-6">
           <label className="block text-xs text-gray-400 mb-1">
             Mobile Number
@@ -645,7 +641,7 @@ export default function SignupPage() {
           />
         </div>
 
-        {/* Password */}
+       
         <div className="mb-6">
           <label className="block text-xs text-gray-400 mb-1">
             Password

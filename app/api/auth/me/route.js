@@ -2,7 +2,7 @@
 // import { NextResponse } from "next/server";
 
 // export async function GET() {
-//   const cookieStore = await cookies(); // ✅ MUST await
+//   const cookieStore = await cookies(); 
 //   const userCookie = cookieStore.get("user");
 
 //   if (!userCookie) {
@@ -37,7 +37,7 @@
 // import { cookies } from "next/headers";
 
 // export async function GET() {
-//   // ✅ MUST AWAIT cookies() in Next.js 15
+//  
 //   const cookieStore = await cookies();
 //   const userCookie = cookieStore.get("user");
 
@@ -58,7 +58,7 @@ import { cookies } from "next/headers"
 import { verifyToken } from "@/lib/auth"
 
 export async function GET() {
-  const cookieStore = await cookies()   // ✅ MUST await
+  const cookieStore = await cookies()   
   const token = cookieStore.get("auth")?.value
 
   const user = token ? verifyToken(token) : null

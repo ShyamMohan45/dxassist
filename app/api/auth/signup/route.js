@@ -28,7 +28,7 @@ export async function POST(req) {
     return NextResponse.json({ success: true, user })
 
   } catch (err) {
-    // ✅ PUT YOUR CODE HERE ⬇⬇⬇
+    
     if (err.code === "ER_DUP_ENTRY") {
       return NextResponse.json(
         { success: false, message: "Email already registered" },
