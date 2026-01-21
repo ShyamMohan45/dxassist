@@ -1,99 +1,3 @@
-# import mysql.connector
-# import os
-# import json
-# from dotenv import load_dotenv
-
-# load_dotenv()
-
-# # -----------------------------
-# # Database Connection
-# # -----------------------------
-# def get_connection():
-#     return mysql.connector.connect(
-#         host=os.getenv("DATABASE_HOST", "localhost"),
-#         user=os.getenv("DATABASE_USER", "root"),
-#         password=os.getenv("DATABASE_PASS"),
-#         database=os.getenv("DATABASE_NAME", "dxassist"),
-#         auth_plugin="mysql_native_password"
-#     )
-
-
-# # -----------------------------
-# # Save Medical Analysis
-# # -----------------------------
-# def save_analysis(user_id: int, summary: str, conditions: list, evidence: list):
-#     """
-#     Stores one medical analysis per request.
-#     conditions and evidence are stored as JSON.
-#     """
-
-#     conn = get_connection()
-#     cursor = conn.cursor()
-
-#     query = """
-#         INSERT INTO medical_analyses (
-#             user_id,
-#             summary,
-#             conditions,
-#             evidence
-#         )
-#         VALUES (%s, %s, %s, %s)
-#     """
-
-#     cursor.execute(
-#         query,
-#         (
-#             user_id,
-#             summary,
-#             json.dumps(conditions, ensure_ascii=False),
-#             json.dumps(evidence, ensure_ascii=False),
-#         )
-#     )
-
-#     conn.commit()
-#     cursor.close()
-#     conn.close()
-
-
-# # -----------------------------
-# # Fetch User Analysis History (OPTIONAL but recommended)
-# # -----------------------------
-# def get_user_analyses(user_id: int):
-#     conn = get_connection()
-#     cursor = conn.cursor(dictionary=True)
-
-#     cursor.execute(
-#         """
-#         SELECT
-#             id,
-#             summary,
-#             conditions,
-#             evidence,
-#             created_at
-#         FROM medical_analyses
-#         WHERE user_id = %s
-#         ORDER BY created_at DESC
-#         """,
-#         (user_id,)
-#     )
-
-#     rows = cursor.fetchall()
-
-#     cursor.close()
-#     conn.close()
-
-#     # Parse JSON fields back to Python objects
-#     for row in rows:
-#         row["conditions"] = json.loads(row["conditions"]) if row["conditions"] else []
-#         row["evidence"] = json.loads(row["evidence"]) if row["evidence"] else []
-
-#     return rows
-
-
-
-
-
-
 import mysql.connector
 import os
 import json
@@ -101,30 +5,48 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-
+# -----------------------------
+# Database Connection
+# -----------------------------
 def get_connection():
     return mysql.connector.connect(
-        host=os.getenv("DATABASE_HOST"),
-        user=os.getenv("DATABASE_USER"),
+        host=os.getenv("DATABASE_HOST", "localhost"),
+        user=os.getenv("DATABASE_USER", "root"),
         password=os.getenv("DATABASE_PASS"),
-        database=os.getenv("DATABASE_NAME"),
+        database=os.getenv("DATABASE_NAME", "dxassist"),
+        auth_plugin="mysql_native_password"
     )
 
 
-def save_analysis(user_id, summary, conditions, evidence):
+# -----------------------------
+# Save Medical Analysis
+# -----------------------------
+def save_analysis(user_id: int, summary: str, conditions: list, evidence: list):
+    """
+    Stores one medical analysis per request.
+    conditions and evidence are stored as JSON.
+    """
+
     conn = get_connection()
     cursor = conn.cursor()
 
-    cursor.execute(
-        """
-        INSERT INTO medical_analyses (user_id, summary, conditions, evidence)
+    query = """
+        INSERT INTO medical_analyses (
+            user_id,
+            summary,
+            conditions,
+            evidence
+        )
         VALUES (%s, %s, %s, %s)
-        """,
+    """
+
+    cursor.execute(
+        query,
         (
             user_id,
             summary,
-            json.dumps(conditions),
-            json.dumps(evidence)
+            json.dumps(conditions, ensure_ascii=False),
+            json.dumps(evidence, ensure_ascii=False),
         )
     )
 
@@ -133,14 +55,21 @@ def save_analysis(user_id, summary, conditions, evidence):
     conn.close()
 
 
-# ✅ ADD THIS FUNCTION AT THE BOTTOM
-def get_analyses_by_user(user_id: int):
+# -----------------------------
+# Fetch User Analysis History (OPTIONAL but recommended)
+# -----------------------------
+def get_user_analyses(user_id: int):
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
 
     cursor.execute(
         """
-        SELECT id, summary, conditions, evidence, created_at
+        SELECT
+            id,
+            summary,
+            conditions,
+            evidence,
+            created_at
         FROM medical_analyses
         WHERE user_id = %s
         ORDER BY created_at DESC
@@ -153,9 +82,86 @@ def get_analyses_by_user(user_id: int):
     cursor.close()
     conn.close()
 
-    # Convert JSON → Python
+    # Parse JSON fields back to Python objects
     for row in rows:
         row["conditions"] = json.loads(row["conditions"]) if row["conditions"] else []
         row["evidence"] = json.loads(row["evidence"]) if row["evidence"] else []
 
     return rows
+
+
+
+
+
+
+# import mysql.connector
+# import os
+# import json
+# from dotenv import load_dotenv
+
+# load_dotenv()
+
+
+# def get_connection():
+#     return mysql.connector.connect(
+#         host=os.getenv("DATABASE_HOST"),
+#         user=os.getenv("DATABASE_USER"),
+#         password=os.getenv("DATABASE_PASS"),
+#         database=os.getenv("DATABASE_NAME"),
+#     )
+
+
+# def save_analysis(user_id, summary, conditions, evidence):
+#     conn = get_connection()
+#     cursor = conn.cursor()
+
+#     cursor.execute(
+#         """
+#         INSERT INTO medical_analyses (user_id, summary, conditions, evidence)
+#         VALUES (%s, %s, %s, %s)
+#         """,
+#         (
+#             user_id,
+#             summary,
+#             json.dumps(conditions),
+#             json.dumps(evidence)
+#         )
+#     )
+
+#     conn.commit()
+#     cursor.close()
+#     conn.close()
+
+
+# # ✅ ADD THIS FUNCTION AT THE BOTTOM
+# def get_analyses_by_user(user_id: int):
+#     conn = get_connection()
+#     cursor = conn.cursor(dictionary=True)
+
+#     cursor.execute(
+#         """
+#         SELECT id, summary, conditions, evidence, created_at
+#         FROM medical_analyses
+#         WHERE user_id = %s
+#         ORDER BY created_at DESC
+#         """,
+#         (user_id,)
+#     )
+
+#     rows = cursor.fetchall()
+
+#     cursor.close()
+#     conn.close()
+
+#     # Convert JSON → Python
+#     for row in rows:
+#         row["conditions"] = json.loads(row["conditions"]) if row["conditions"] else []
+#         row["evidence"] = json.loads(row["evidence"]) if row["evidence"] else []
+
+#     return rows
+
+
+
+
+
+

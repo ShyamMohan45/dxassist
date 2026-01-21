@@ -157,9 +157,273 @@
 //   );
 // }
 
+
+
+// "use client";
+
+// import { useEffect, useState } from "react";
+// import {
+//   User,
+//   FileText,
+//   Mic,
+//   ShieldCheck,
+//   AlertCircle,
+// } from "lucide-react";
+
+// /* ================= PAGE ================= */
+
+// export default function DashboardPage() {
+//   const [user] = useState({
+//     email: "hello@gmail.com",
+//     lastLogin: "Today, 09:42 AM",
+//     docs: 18,
+//     voice: 6,
+//   });
+
+//   const [clinical] = useState({
+//     summary:
+//       "Vitals are stable. Mild elevation in heart rate observed during activity.",
+//     condition: "No Critical Condition",
+//     severity: "green", // green | yellow | red
+//     lastAnalyzed: "2 minutes ago",
+//   });
+
+//   const [voice] = useState({
+//     lastQuestion: "Is my heart rate normal?",
+//     response:
+//       "Your heart rate is within a healthy range for light physical activity.",
+//     status: "Idle", // Idle | Listening | Responding
+//   });
+
+//   return (
+//     <main className="min-h-screen bg-[#f8fafc] text-slate-900 px-8 py-10">
+
+//       {/* ================= USER OVERVIEW ================= */}
+//       <section className="mb-10">
+//         <h2 className="text-lg font-semibold mb-4">
+//           User Overview
+//         </h2>
+
+//         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
+//           <Info label="User Email" value={user.email} />
+//           <Info label="Last Login" value={user.lastLogin} />
+//           <Info label="Documents Analyzed" value={user.docs} />
+//           <Info label="Voice Interactions" value={user.voice} />
+//         </div>
+//       </section>
+
+//       {/* ================= CLINICAL SNAPSHOT ================= */}
+//       <section className="mb-12">
+//         <h2 className="text-lg font-semibold mb-4">
+//           Clinical Snapshot
+//         </h2>
+
+//         <div
+//           className={`border rounded-lg p-5 ${
+//             clinical.severity === "green"
+//               ? "border-emerald-400 bg-emerald-50"
+//               : clinical.severity === "yellow"
+//               ? "border-yellow-400 bg-yellow-50"
+//               : "border-red-400 bg-red-50"
+//           }`}
+//         >
+//           <p className="font-medium mb-2">
+//             {clinical.summary}
+//           </p>
+
+//           <div className="flex flex-wrap gap-6 text-sm text-slate-700">
+//             <span>
+//               <strong>Condition:</strong> {clinical.condition}
+//             </span>
+//             <span>
+//               <strong>Severity:</strong>{" "}
+//               {clinical.severity.toUpperCase()}
+//             </span>
+//             <span>
+//               <strong>Last Analysis:</strong>{" "}
+//               {clinical.lastAnalyzed}
+//             </span>
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* ================= VOICE ASSISTANT ================= */}
+//       <section className="mb-12">
+//         <h2 className="text-lg font-semibold mb-4">
+//           Voice Assistant Status
+//         </h2>
+
+//         <div className="border rounded-lg p-5 bg-white">
+//           <Row
+//             icon={<Mic size={16} />}
+//             label="Last Voice Question"
+//             value={voice.lastQuestion}
+//           />
+//           <Row
+//             icon={<FileText size={16} />}
+//             label="AI Response Summary"
+//             value={voice.response}
+//           />
+//           <Row
+//             icon={<AlertCircle size={16} />}
+//             label="Assistant Status"
+//             value={voice.status}
+//           />
+//         </div>
+//       </section>
+
+//       {/* ================= EXPLAINABILITY ================= */}
+//       <section className="mb-10">
+//         <h2 className="text-lg font-semibold mb-4">
+//           Explainability & Trust
+//         </h2>
+
+//         <ul className="text-sm text-slate-700 space-y-2">
+//           <li>• AI insights are evidence-based</li>
+//           <li>• Citations available in detailed reports</li>
+//           <li>• This system does not provide medical diagnosis</li>
+//         </ul>
+//       </section>
+
+//       {/* ================= SECURITY ================= */}
+//       <section>
+//         <h2 className="text-lg font-semibold mb-4">
+//           Security & Privacy
+//         </h2>
+
+//         <div className="border rounded-lg p-5 bg-white flex gap-4 items-start">
+//           <ShieldCheck className="text-emerald-600 mt-1" />
+//           <div className="text-sm text-slate-700">
+//             <p>• Your data is private and user-isolated</p>
+//             <p>• Each analysis is linked to your account</p>
+//             <p>• No data is shared across users</p>
+//           </div>
+//         </div>
+//       </section>
+//     </main>
+//   );
+// }
+
+// /* ================= COMPONENTS ================= */
+
+// function Info({ label, value }) {
+//   return (
+//     <div className="bg-white border rounded-lg p-4">
+//       <p className="text-slate-500 text-xs mb-1">
+//         {label}
+//       </p>
+//       <p className="font-semibold">{value}</p>
+//     </div>
+//   );
+// }
+
+// function Row({ icon, label, value }) {
+//   return (
+//     <div className="flex items-start gap-3 mb-3 text-sm">
+//       <span className="text-slate-400">{icon}</span>
+//       <div>
+//         <p className="text-slate-500">{label}</p>
+//         <p className="font-medium">{value}</p>
+//       </div>
+//     </div>
+//   );
+// }
+
+
+
+// "use client";
+
+// import { useState } from "react";
+// import Link from "next/link";
+
+// export default function AdminDashboard() {
+//   const [email, setEmail] = useState("");
+//   const [patient, setPatient] = useState(null);
+//   const [error, setError] = useState("");
+
+//   async function searchPatient() {
+//     setError("");
+//     setPatient(null);
+
+//     const key = sessionStorage.getItem("admin_key");
+//     if (!key) {
+//       setError("Admin not logged in");
+//       return;
+//     }
+
+//     const res = await fetch(
+//       `http://127.0.0.1:8001/admin/dashboard?patient_email=${email}`,
+//       {
+//         headers: {
+//           "x-admin-key": key,
+//         },
+//       }
+//     );
+
+//     const data = await res.json();
+
+//     if (!res.ok) {
+//       setError(data.detail);
+//     } else {
+//       setPatient(data);
+//     }
+//   }
+
+//   return (
+//     <main className="min-h-screen bg-black text-white p-10">
+//       <h1 className="text-4xl font-bold mb-2">Admin Patient Dashboard</h1>
+//       <p className="text-white/60 mb-8">
+//         Search patients to view clinical activity
+//       </p>
+
+//       <div className="flex gap-4 mb-6">
+//         <input
+//           className="flex-1 p-3 rounded text-black"
+//           placeholder="Enter patient email"
+//           onChange={(e) => setEmail(e.target.value)}
+//         />
+//         <button
+//           onClick={searchPatient}
+//           className="bg-teal-500 px-6 py-3 rounded font-semibold"
+//         >
+//           Search
+//         </button>
+//       </div>
+
+//       {error && <p className="text-red-500">{error}</p>}
+
+//       {patient && (
+//         <div className="border border-white/20 rounded-lg p-6 mt-6">
+//           <p><b>Email:</b> {patient.email}</p>
+//           <p><b>Last Login:</b> {patient.last_login || "N/A"}</p>
+//           <p><b>Documents Analyzed:</b> {patient.documents_analyzed}</p>
+
+//           <div className="mt-4">
+//             <p className="font-semibold">Last Analysis</p>
+//             <p className="text-white/70">
+//               {patient.last_analysis?.summary || "No analysis yet"}
+//             </p>
+//           </div>
+
+//           <Link
+//             href={`/admin/patient-history?email=${patient.email}`}
+//             className="inline-block mt-4 text-blue-400 underline"
+//           >
+//             View Full History →
+//           </Link>
+//         </div>
+//       )}
+//     </main>
+//   );
+// }
+
+
+
+
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
 import {
   User,
   FileText,
@@ -167,6 +431,26 @@ import {
   ShieldCheck,
   AlertCircle,
 } from "lucide-react";
+
+/* ================= ANIMATION VARIANTS ================= */
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const card = {
+  hidden: { opacity: 0, y: 40, rotateX: -10 },
+  show: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: { type: "spring", stiffness: 120, damping: 14 },
+  },
+};
 
 /* ================= PAGE ================= */
 
@@ -182,7 +466,7 @@ export default function DashboardPage() {
     summary:
       "Vitals are stable. Mild elevation in heart rate observed during activity.",
     condition: "No Critical Condition",
-    severity: "green", // green | yellow | red
+    severity: "green",
     lastAnalyzed: "2 minutes ago",
   });
 
@@ -190,139 +474,186 @@ export default function DashboardPage() {
     lastQuestion: "Is my heart rate normal?",
     response:
       "Your heart rate is within a healthy range for light physical activity.",
-    status: "Idle", // Idle | Listening | Responding
+    status: "Idle",
   });
 
   return (
-    <main className="min-h-screen bg-[#f8fafc] text-slate-900 px-8 py-10">
-
+    <motion.main
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="
+        min-h-screen relative overflow-hidden
+        bg-[radial-gradient(circle_at_top,_#e0f2fe,_#f8fafc_45%)]
+        px-8 py-12 text-slate-900
+      "
+    >
       {/* ================= USER OVERVIEW ================= */}
-      <section className="mb-10">
-        <h2 className="text-lg font-semibold mb-4">
-          User Overview
-        </h2>
+      <section className="mb-14">
+        <h2 className="text-xl font-semibold mb-6">User Overview</h2>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm">
-          <Info label="User Name" value={user.name} />
-          <Info label="Last Login" value={user.lastLogin} />
-          <Info label="Documents Analyzed" value={user.docs} />
-          <Info label="Voice Interactions" value={user.voice} />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <Info icon={<User />} label="User Name" value={user.name} />
+          <Info icon={<AlertCircle />} label="Last Login" value={user.lastLogin} />
+          <Info icon={<FileText />} label="Documents" value={user.docs} />
+          <Info icon={<Mic />} label="Voice Sessions" value={user.voice} />
         </div>
       </section>
 
       {/* ================= CLINICAL SNAPSHOT ================= */}
-      <section className="mb-12">
-        <h2 className="text-lg font-semibold mb-4">
-          Clinical Snapshot
-        </h2>
+      <section className="mb-16">
+        <h2 className="text-xl font-semibold mb-6">Clinical Snapshot</h2>
 
-        <div
-          className={`border rounded-lg p-5 ${
-            clinical.severity === "green"
-              ? "border-emerald-400 bg-emerald-50"
-              : clinical.severity === "yellow"
-              ? "border-yellow-400 bg-yellow-50"
-              : "border-red-400 bg-red-50"
-          }`}
+        <motion.div
+          variants={card}
+          whileHover={{ scale: 1.04 }}
+          className="
+            relative rounded-2xl p-[2px]
+            bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-400
+          "
         >
-          <p className="font-medium mb-2">
-            {clinical.summary}
-          </p>
+          <div className="relative rounded-2xl bg-white/80 backdrop-blur-xl p-6">
 
-          <div className="flex flex-wrap gap-6 text-sm text-slate-700">
-            <span>
-              <strong>Condition:</strong> {clinical.condition}
+            {/* Pulse indicator */}
+            <span className="absolute top-4 right-4">
+              <span className="absolute inline-flex h-4 w-4 rounded-full bg-emerald-400 animate-ping" />
+              <span className="relative inline-flex h-4 w-4 rounded-full bg-emerald-500" />
             </span>
-            <span>
-              <strong>Severity:</strong>{" "}
-              {clinical.severity.toUpperCase()}
-            </span>
-            <span>
-              <strong>Last Analysis:</strong>{" "}
-              {clinical.lastAnalyzed}
-            </span>
+
+            <p className="font-semibold mb-4">
+              {clinical.summary}
+            </p>
+
+            {/* Animated Progress */}
+            <div className="mb-4">
+              <p className="text-xs text-slate-500 mb-1">Risk Severity</p>
+              <div className="h-2 rounded-full bg-slate-200 overflow-hidden">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: "28%" }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  className="h-full bg-gradient-to-r from-emerald-400 to-cyan-400"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-6 text-sm text-slate-700">
+              <span><strong>Condition:</strong> {clinical.condition}</span>
+              <span><strong>Severity:</strong> GREEN</span>
+              <span><strong>Last:</strong> {clinical.lastAnalyzed}</span>
+            </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* ================= VOICE ASSISTANT ================= */}
-      <section className="mb-12">
-        <h2 className="text-lg font-semibold mb-4">
-          Voice Assistant Status
-        </h2>
+      <section className="mb-16">
+        <h2 className="text-xl font-semibold mb-6">Voice Assistant</h2>
 
-        <div className="border rounded-lg p-5 bg-white">
-          <Row
-            icon={<Mic size={16} />}
-            label="Last Voice Question"
-            value={voice.lastQuestion}
-          />
-          <Row
-            icon={<FileText size={16} />}
-            label="AI Response Summary"
-            value={voice.response}
-          />
-          <Row
-            icon={<AlertCircle size={16} />}
-            label="Assistant Status"
-            value={voice.status}
-          />
-        </div>
+        <motion.div
+          variants={card}
+          whileHover={{ scale: 1.03 }}
+          className="
+            rounded-2xl border bg-white/80 backdrop-blur-xl
+            p-6 shadow-lg
+          "
+        >
+          <div className="flex items-center gap-4 mb-6">
+            <motion.div
+              animate={{ scale: [1, 1.2, 1], rotate: [0, 8, -8, 0] }}
+              transition={{ repeat: Infinity, duration: 2 }}
+              className="
+                h-12 w-12 rounded-full
+                bg-indigo-500/20 flex items-center justify-center
+              "
+            >
+              <Mic className="text-indigo-600" />
+            </motion.div>
+
+            <p className="text-sm text-slate-600">
+              Listening for voice input...
+            </p>
+          </div>
+
+          <Row label="Last Question" value={voice.lastQuestion} />
+          <Row label="AI Response" value={voice.response} />
+          <Row label="Status" value={voice.status} />
+        </motion.div>
       </section>
 
       {/* ================= EXPLAINABILITY ================= */}
-      <section className="mb-10">
-        <h2 className="text-lg font-semibold mb-4">
-          Explainability & Trust
-        </h2>
+      <section className="mb-14">
+        <h2 className="text-xl font-semibold mb-6">Explainability & Trust</h2>
 
-        <ul className="text-sm text-slate-700 space-y-2">
-          <li>• AI insights are evidence-based</li>
-          <li>• Citations available in detailed reports</li>
-          <li>• This system does not provide medical diagnosis</li>
-        </ul>
+        <motion.ul
+          variants={container}
+          className="space-y-3 text-sm text-slate-700"
+        >
+          <motion.li variants={card}>✔ Evidence-based AI insights</motion.li>
+          <motion.li variants={card}>✔ Transparent citations</motion.li>
+          <motion.li variants={card}>✔ Not a diagnostic system</motion.li>
+        </motion.ul>
       </section>
 
       {/* ================= SECURITY ================= */}
       <section>
-        <h2 className="text-lg font-semibold mb-4">
-          Security & Privacy
-        </h2>
+        <h2 className="text-xl font-semibold mb-6">Security & Privacy</h2>
 
-        <div className="border rounded-lg p-5 bg-white flex gap-4 items-start">
-          <ShieldCheck className="text-emerald-600 mt-1" />
-          <div className="text-sm text-slate-700">
-            <p>• Your data is private and user-isolated</p>
-            <p>• Each analysis is linked to your account</p>
-            <p>• No data is shared across users</p>
+        <motion.div
+          variants={card}
+          whileHover={{ scale: 1.02 }}
+          className="
+            flex gap-4 rounded-2xl border
+            bg-white/80 backdrop-blur-xl p-6
+          "
+        >
+          <ShieldCheck className="text-emerald-600" />
+          <div className="text-sm text-slate-700 space-y-1">
+            <p>• Encrypted & isolated data</p>
+            <p>• Account-based access</p>
+            <p>• Zero cross-user sharing</p>
           </div>
-        </div>
+        </motion.div>
       </section>
-    </main>
+    </motion.main>
   );
 }
 
 /* ================= COMPONENTS ================= */
 
-function Info({ label, value }) {
+function Info({ icon, label, value }) {
   return (
-    <div className="bg-white border rounded-lg p-4">
-      <p className="text-slate-500 text-xs mb-1">
-        {label}
-      </p>
-      <p className="font-semibold">{value}</p>
-    </div>
+    <motion.div
+      variants={card}
+      whileHover={{
+        y: -10,
+        rotateX: 8,
+        rotateY: -8,
+        scale: 1.05,
+      }}
+      transition={{ type: "spring", stiffness: 180 }}
+      className="
+        group relative rounded-2xl border
+        bg-white/70 backdrop-blur-xl
+        p-5 shadow-lg transform-gpu perspective-1000
+      "
+    >
+      <div className="flex items-center gap-2 mb-2 text-indigo-500">
+        {icon}
+        <p className="text-xs uppercase tracking-widest text-slate-500">
+          {label}
+        </p>
+      </div>
+      <p className="text-xl font-bold">{value}</p>
+    </motion.div>
   );
 }
 
-function Row({ icon, label, value }) {
+function Row({ label, value }) {
   return (
-    <div className="flex items-start gap-3 mb-3 text-sm">
-      <span className="text-slate-400">{icon}</span>
-      <div>
-        <p className="text-slate-500">{label}</p>
-        <p className="font-medium">{value}</p>
-      </div>
+    <div className="mb-4">
+      <p className="text-xs text-slate-500">{label}</p>
+      <p className="font-medium">{value}</p>
     </div>
   );
 }

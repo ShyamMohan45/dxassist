@@ -667,6 +667,17 @@ export default function SignupPage() {
             Login
           </span>
         </p>
+        
+<p className="text-center mt-4 text-xs text-gray-500">
+  Login as{" "}
+  <span
+    onClick={() => router.push("/login-admin")}
+    className="text-red-600 font-semibold cursor-pointer hover:underline"
+  >
+    Admin
+  </span>
+</p>
+
       </form>
     </div>
   )

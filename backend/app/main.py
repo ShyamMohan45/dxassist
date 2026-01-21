@@ -87,6 +87,16 @@
 #         if os.path.exists(temp_path):
 #             os.remove(temp_path)
 
+
+
+
+
+
+
+
+
+
+
 import os
 from fastapi import FastAPI, UploadFile, File, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -155,3 +165,104 @@ def get_past_analyses(user=Depends(get_user)):
         "status": "success",
         "data": data
     }
+
+
+
+# from fastapi import FastAPI, Request, Response, HTTPException
+# from fastapi.middleware.cors import CORSMiddleware
+# import mysql.connector
+# import os
+
+# from app.auth import require_admin
+
+# app = FastAPI()
+
+# # ---------------- CORS ----------------
+# app.add_middleware(
+#     CORSMiddleware,
+#     allow_origins=["http://localhost:3000"],
+#     allow_credentials=True,
+#     allow_methods=["*"],
+#     allow_headers=["*"],
+# )
+
+# # ---------------- DB ----------------
+# def get_db():
+#     return mysql.connector.connect(
+#         host=os.getenv("DATABASE_HOST"),
+#         user=os.getenv("DATABASE_USER"),
+#         password=os.getenv("DATABASE_PASS"),
+#         database=os.getenv("DATABASE_NAME"),
+#     )
+
+# # ---------------- ADMIN LOGIN ----------------
+# @app.post("/admin/login")
+# def admin_login(data: dict, response: Response):
+#     email = data.get("email")
+#     password = data.get("password")
+
+#     if (
+#         email != os.getenv("ADMIN_EMAIL")
+#         or password != os.getenv("ADMIN_SECRET_PASSWORD")
+#     ):
+#         raise HTTPException(status_code=403, detail="Invalid admin credentials")
+
+#     response.set_cookie(
+#         key="admin_auth",
+#         value="true",
+#         httponly=True,
+#         samesite="lax",
+#     )
+
+#     return {"success": True}
+
+
+# # ---------------- ADMIN DASHBOARD ----------------
+# @app.get("/admin/dashboard")
+# def admin_dashboard(patient_email: str, request: Request):
+#     require_admin(request)
+
+#     db = get_db()
+#     cursor = db.cursor(dictionary=True)
+
+#     cursor.execute(
+#         """
+#         SELECT id, email, last_login
+#         FROM users
+#         WHERE email = %s
+#         """,
+#         (patient_email,),
+#     )
+
+#     user = cursor.fetchone()
+#     if not user:
+#         raise HTTPException(status_code=404, detail="Patient not found")
+
+#     cursor.execute(
+#         """
+#         SELECT summary, created_at
+#         FROM medical_analyses
+#         WHERE user_id = %s
+#         ORDER BY created_at DESC
+#         LIMIT 1
+#         """,
+#         (user["id"],),
+#     )
+#     last_analysis = cursor.fetchone()
+
+#     cursor.execute(
+#         """
+#         SELECT COUNT(*) AS total
+#         FROM medical_analyses
+#         WHERE user_id = %s
+#         """,
+#         (user["id"],),
+#     )
+#     total_docs = cursor.fetchone()["total"]
+
+#     return {
+#         "email": user["email"],
+#         "last_login": user["last_login"],
+#         "documents_analyzed": total_docs,
+#         "last_analysis": last_analysis,
+#     }

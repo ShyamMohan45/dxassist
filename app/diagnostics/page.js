@@ -952,10 +952,264 @@
 // // // //     </main>
 // // // //   )
 // }
+
+
+
+
+
+// "use client"
+
+// import { useRouter } from "next/navigation"
+// import { useAuth } from "@/app/context/AuthContext"
+// import { useEffect, useRef, useState } from "react"
+// import Link from "next/link"
+
+// export default function Home() {
+//   const root = useRef(null)
+//   const [scrollY, setScrollY] = useState(0)
+
+//   const router = useRouter()
+// const { user, loading } = useAuth()
+
+// const handleEnterDxAssist = () => {
+//   if (loading) return
+
+//   if (!user) {
+//     router.push("/login")
+//   } else {
+//     router.push("/diagnostics/analyze")
+//   }
+// }
+
+
+//   useEffect(() => {
+//     const onScroll = () => setScrollY(window.scrollY)
+//     window.addEventListener("scroll", onScroll)
+//     return () => window.removeEventListener("scroll", onScroll)
+//   }, [])
+
+  
+//   useEffect(() => {
+//     const move = (e) => {
+//       root.current?.style.setProperty("--cx", `${e.clientX}px`)
+//       root.current?.style.setProperty("--cy", `${e.clientY}px`)
+//     }
+//     window.addEventListener("mousemove", move)
+//     return () => window.removeEventListener("mousemove", move)
+//   }, [])
+
+//   return (
+//     <main
+//       ref={root}
+//       className="relative bg-[#05070c] text-white overflow-hidden"
+//     >
+      
+//       <div
+//         className="
+//           pointer-events-none fixed inset-0 z-10
+//           bg-[radial-gradient(500px_at_var(--cx)_var(--cy),rgba(255,255,255,0.05),transparent_70%)]
+//         "
+//       />
+
+     
+//       <section className="min-h-screen flex items-center px-[14vw]">
+//         <div className="max-w-5xl">
+//           <p className="text-[11px] tracking-[0.45em] text-white/40 mb-10">
+//             CLINICAL INTELLIGENCE SYSTEM
+//           </p>
+
+//           <h1 className="text-[7.5vw] leading-[0.95] font-extrabold">
+//             Medicine
+//             <br />
+//             requires
+//             <br />
+//             <span className="text-white/20">clarity</span>
+//           </h1>
+
+//           <p className="mt-16 text-xl text-white/55 max-w-2xl">
+//             Most clinical decisions begin with fragmented narratives,
+//             incomplete signals, and cognitive pressure.
+//           </p>
+
+//           <p className="mt-6 text-xl text-white/55 max-w-2xl">
+//             DxAssist exists to reduce ambiguity —
+//             not by replacing clinicians,
+//             but by organizing medical reasoning.
+//           </p>
+//         </div>
+//       </section>
+
+      
+//       <section className="min-h-screen px-[14vw] flex items-center">
+//         <div className="w-full">
+//           <p className="text-[11px] tracking-[0.45em] text-white/40 mb-12">
+//             FROM CHAOS TO SIGNAL
+//           </p>
+
+//           <div className="space-y-20">
+//             <h2
+//               className="font-black uppercase leading-none"
+//               style={{
+//                 fontSize: "9vw",
+//                 transform: `translateX(${Math.min(scrollY * 0.08, 120)}px)`,
+//               }}
+//             >
+//               Symptoms
+//             </h2>
+
+//             <h2
+//               className="font-black uppercase leading-none text-white/20"
+//               style={{
+//                 fontSize: "9vw",
+//                 transform: `translateX(${Math.max(-scrollY * 0.08, -120)}px)`,
+//               }}
+//             >
+//               Context
+//             </h2>
+
+//             <h2
+//               className="font-black uppercase leading-none text-white/10"
+//               style={{
+//                 fontSize: "9vw",
+//               }}
+//             >
+//               Evidence
+//             </h2>
+//           </div>
+//         </div>
+//       </section>
+
+      
+//       <section className="min-h-screen px-[14vw] flex items-center">
+//         <div className="grid grid-cols-12 w-full gap-y-20">
+//           <div className="col-span-4">
+//             <p className="text-[11px] tracking-[0.45em] text-white/40 mb-6">
+//               REASONING LAYER
+//             </p>
+//             <h3 className="text-4xl font-semibold leading-snug">
+//               Explainable
+//               <br />
+//               medical intelligence
+//             </h3>
+//           </div>
+
+//           <div className="col-span-6 col-start-7 space-y-10 text-white/55 text-lg">
+//             <p>
+//               DxAssist transforms narrative clinical notes into
+//               structured reasoning paths.
+//             </p>
+
+//             <p>
+//               Probabilities are derived from medical literature,
+//               guidelines, and contextual patient signals —
+//               never intuition alone.
+//             </p>
+
+//             <p>
+//               Every recommendation can be interrogated,
+//               traced, and understood.
+//             </p>
+//           </div>
+//         </div>
+//       </section>
+
+      
+//       <section className="min-h-screen px-[14vw] flex items-center">
+//         <div className="max-w-3xl">
+//           <p className="text-[11px] tracking-[0.45em] text-white/40 mb-8">
+//             CLINICAL CONFIDENCE
+//           </p>
+
+//           <h2 className="text-[4vw] leading-tight font-semibold mb-16">
+//             Decisions should feel
+//             <br />
+//             grounded —
+//             <br />
+//             not rushed
+//           </h2>
+
+
+         
+           
+//                    {/* <button onClick={handleEnterDxAssist}
+//             className="
+//               group relative text-2xl uppercase tracking-widest
+//               text-white/80 hover:text-white
+//               transition-all duration-500
+//             "
+//           >
+//             Enter DxAssist
+//             <span
+//               className="
+//                 block h-[1px] bg-white w-0
+//                 group-hover:w-full
+//                 transition-all duration-500
+//               "
+//             />
+//           </button> */}
+
+
+//           <p>if you want to summarisation of your unstructured clinical notes then click below the button the Enter dxassist</p>
+//           <button
+//             onClick={handleEnterDxAssist}
+//             disabled={loading}
+//             className="
+//               group relative text-2xl uppercase tracking-widest
+//               text-white/80 hover:text-white
+//               transition-all duration-500
+//               disabled:opacity-40 disabled:cursor-not-allowed
+//             "
+//           >
+//             {loading ? "Checking session…" : "Enter DxAssist"}
+//             <span
+//               className="
+//                 block h-[1px] bg-white w-0
+//                 group-hover:w-full
+//                 transition-all duration-500
+//               "
+//             />
+//           </button>
+//             <section className="mt-10">
+//           <p>if you get diagnosis of your skin disease by uploading image then</p>
+//                     <button className="
+//               group relative text-2xl uppercase tracking-widest
+//               text-white/80 hover:text-white
+//               transition-all duration-500
+//               disabled:opacity-40 disabled:cursor-not-allowed
+//             ">Click Here
+//                       <span
+//               className="
+//                 block h-[1px] bg-white w-0
+//                 group-hover:w-full
+//                 transition-all duration-500
+//               "
+//             />
+//                     </button>
+//                     </section>
+
+
+          
+// </div>
+//       </section>
+
+    
+//       <footer className="py-28 text-center text-xs text-white/35">
+//         DxAssist supports clinical decision-making.
+//         <br />
+//         It does not replace professional medical judgment.
+//       </footer>
+//     </main>
+//   )
+// }
+
+
+
+
+
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useAuth } from "@/app/context/AuthContext"
+import { useAuth } from "../context/AuthContext"
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 
@@ -964,18 +1218,17 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0)
 
   const router = useRouter()
-const { user, loading } = useAuth()
+  const { user, loading } = useAuth()
 
-const handleEnterDxAssist = () => {
-  if (loading) return
+  const handleEnterDxAssist = () => {
+    if (loading) return
 
-  if (!user) {
-    router.push("/login")
-  } else {
-    router.push("/diagnostics/analyze")
+    if (!user) {
+      router.push("/login")
+    } else {
+      router.push("/diagnostics/analyze")
+    }
   }
-}
-
 
   useEffect(() => {
     const onScroll = () => setScrollY(window.scrollY)
@@ -983,7 +1236,6 @@ const handleEnterDxAssist = () => {
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
-  
   useEffect(() => {
     const move = (e) => {
       root.current?.style.setProperty("--cx", `${e.clientX}px`)
@@ -996,37 +1248,37 @@ const handleEnterDxAssist = () => {
   return (
     <main
       ref={root}
-      className="relative bg-[#05070c] text-white overflow-hidden"
+      className="relative bg-[#f5f9ff] text-slate-900 overflow-hidden"
     >
-      
+      {/* SOFT MEDICAL GLOW */}
       <div
         className="
           pointer-events-none fixed inset-0 z-10
-          bg-[radial-gradient(500px_at_var(--cx)_var(--cy),rgba(255,255,255,0.05),transparent_70%)]
+          bg-[radial-gradient(600px_at_var(--cx)_var(--cy),rgba(37,99,235,0.12),transparent_70%)]
         "
       />
 
-     
+      {/* HERO */}
       <section className="min-h-screen flex items-center px-[14vw]">
         <div className="max-w-5xl">
-          <p className="text-[11px] tracking-[0.45em] text-white/40 mb-10">
+          <p className="text-[11px] tracking-[0.45em] text-slate-500 mb-10">
             CLINICAL INTELLIGENCE SYSTEM
           </p>
 
-          <h1 className="text-[7.5vw] leading-[0.95] font-extrabold">
+          <h1 className="text-[7.5vw] leading-[0.95] font-extrabold text-slate-900">
             Medicine
             <br />
             requires
             <br />
-            <span className="text-white/20">clarity</span>
+            <span className="text-blue-600/70">clarity</span>
           </h1>
 
-          <p className="mt-16 text-xl text-white/55 max-w-2xl">
+          <p className="mt-16 text-xl text-slate-600 max-w-2xl">
             Most clinical decisions begin with fragmented narratives,
             incomplete signals, and cognitive pressure.
           </p>
 
-          <p className="mt-6 text-xl text-white/55 max-w-2xl">
+          <p className="mt-6 text-xl text-slate-600 max-w-2xl">
             DxAssist exists to reduce ambiguity —
             not by replacing clinicians,
             but by organizing medical reasoning.
@@ -1034,16 +1286,16 @@ const handleEnterDxAssist = () => {
         </div>
       </section>
 
-      
+      {/* SCROLL TYPOGRAPHY */}
       <section className="min-h-screen px-[14vw] flex items-center">
         <div className="w-full">
-          <p className="text-[11px] tracking-[0.45em] text-white/40 mb-12">
+          <p className="text-[11px] tracking-[0.45em] text-slate-500 mb-12">
             FROM CHAOS TO SIGNAL
           </p>
 
           <div className="space-y-20">
             <h2
-              className="font-black uppercase leading-none"
+              className="font-black uppercase leading-none text-slate-900"
               style={{
                 fontSize: "9vw",
                 transform: `translateX(${Math.min(scrollY * 0.08, 120)}px)`,
@@ -1053,7 +1305,7 @@ const handleEnterDxAssist = () => {
             </h2>
 
             <h2
-              className="font-black uppercase leading-none text-white/20"
+              className="font-black uppercase leading-none text-slate-400"
               style={{
                 fontSize: "9vw",
                 transform: `translateX(${Math.max(-scrollY * 0.08, -120)}px)`,
@@ -1063,7 +1315,7 @@ const handleEnterDxAssist = () => {
             </h2>
 
             <h2
-              className="font-black uppercase leading-none text-white/10"
+              className="font-black uppercase leading-none text-slate-300"
               style={{
                 fontSize: "9vw",
               }}
@@ -1074,21 +1326,21 @@ const handleEnterDxAssist = () => {
         </div>
       </section>
 
-      
+      {/* REASONING */}
       <section className="min-h-screen px-[14vw] flex items-center">
         <div className="grid grid-cols-12 w-full gap-y-20">
           <div className="col-span-4">
-            <p className="text-[11px] tracking-[0.45em] text-white/40 mb-6">
+            <p className="text-[11px] tracking-[0.45em] text-slate-500 mb-6">
               REASONING LAYER
             </p>
-            <h3 className="text-4xl font-semibold leading-snug">
+            <h3 className="text-4xl font-semibold leading-snug text-slate-900">
               Explainable
               <br />
               medical intelligence
             </h3>
           </div>
 
-          <div className="col-span-6 col-start-7 space-y-10 text-white/55 text-lg">
+          <div className="col-span-6 col-start-7 space-y-10 text-slate-600 text-lg">
             <p>
               DxAssist transforms narrative clinical notes into
               structured reasoning paths.
@@ -1108,14 +1360,14 @@ const handleEnterDxAssist = () => {
         </div>
       </section>
 
-      
+      {/* CTA */}
       <section className="min-h-screen px-[14vw] flex items-center">
         <div className="max-w-3xl">
-          <p className="text-[11px] tracking-[0.45em] text-white/40 mb-8">
+          <p className="text-[11px] tracking-[0.45em] text-slate-500 mb-8">
             CLINICAL CONFIDENCE
           </p>
 
-          <h2 className="text-[4vw] leading-tight font-semibold mb-16">
+          <h2 className="text-[4vw] leading-tight font-semibold mb-16 text-slate-900">
             Decisions should feel
             <br />
             grounded —
@@ -1123,34 +1375,17 @@ const handleEnterDxAssist = () => {
             not rushed
           </h2>
 
+          <p className="mb-6 text-slate-600">
+            If you want summarisation of unstructured clinical notes,
+            click below to enter DxAssist.
+          </p>
 
-         
-           
-                   {/* <button onClick={handleEnterDxAssist}
-            className="
-              group relative text-2xl uppercase tracking-widest
-              text-white/80 hover:text-white
-              transition-all duration-500
-            "
-          >
-            Enter DxAssist
-            <span
-              className="
-                block h-[1px] bg-white w-0
-                group-hover:w-full
-                transition-all duration-500
-              "
-            />
-          </button> */}
-
-
-          <p>if you want to summarisation of your unstructured clinical notes then click below the button the Enter dxassist</p>
           <button
             onClick={handleEnterDxAssist}
             disabled={loading}
             className="
               group relative text-2xl uppercase tracking-widest
-              text-white/80 hover:text-white
+              text-blue-700 hover:text-blue-900
               transition-all duration-500
               disabled:opacity-40 disabled:cursor-not-allowed
             "
@@ -1158,37 +1393,39 @@ const handleEnterDxAssist = () => {
             {loading ? "Checking session…" : "Enter DxAssist"}
             <span
               className="
-                block h-[1px] bg-white w-0
+                block h-[2px] bg-blue-600 w-0
                 group-hover:w-full
                 transition-all duration-500
               "
             />
           </button>
-            <section className="mt-10">
-          <p>if you get diagnosis of your skin disease by uploading image then</p>
-                    <button className="
-              group relative text-2xl uppercase tracking-widest
-              text-white/80 hover:text-white
-              transition-all duration-500
-              disabled:opacity-40 disabled:cursor-not-allowed
-            ">Click Here
-                      <span
+
+          <section className="mt-10">
+            <p className="mb-4 text-slate-600">
+              If you want diagnosis of your skin disease by uploading an image
+            </p>
+            <button
               className="
-                block h-[1px] bg-white w-0
-                group-hover:w-full
+                group relative text-2xl uppercase tracking-widest
+                text-teal-700 hover:text-teal-900
                 transition-all duration-500
               "
-            />
-                    </button>
-                    </section>
-
-
-          
-</div>
+            >
+              Click Here
+              <span
+                className="
+                  block h-[2px] bg-teal-600 w-0
+                  group-hover:w-full
+                  transition-all duration-500
+                "
+              />
+            </button>
+          </section>
+        </div>
       </section>
 
-    
-      <footer className="py-28 text-center text-xs text-white/35">
+      {/* FOOTER */}
+      <footer className="py-28 text-center text-xs text-slate-500">
         DxAssist supports clinical decision-making.
         <br />
         It does not replace professional medical judgment.
