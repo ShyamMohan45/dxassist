@@ -101,3 +101,8 @@ html, body {
     #f1f5f9
   );
 }
+
+
+canvas {
+  display: block;
+}

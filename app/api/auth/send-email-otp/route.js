@@ -1,39 +1,105 @@
+// import { db } from "@/lib/db"
+// import { saveEmailOTP } from "@/lib/otpStore"
+// import { sendOTPEmail } from "@/lib/mailer"
+// import { NextResponse } from "next/server"
+
+// export async function POST(req) {
+//   try {
+//     const { email } = await req.json()
+
+//     const [[user]] = await db.query(
+//       "SELECT id FROM users WHERE email = ?",
+//       [email]
+//     )
+
+//     if (!user) {
+//       return NextResponse.json(
+//         { success: false, message: "Email not registered" },
+//         { status: 404 }
+//       )
+//     }
+
+//     const otp = Math.floor(100000 + Math.random() * 900000).toString()
+
+//     saveEmailOTP(email, otp)
+//     await sendOTPEmail(email, otp)
+
+//     return NextResponse.json({ success: true })
+
+//   } catch (err) {
+//     console.error("EMAIL OTP ERROR:", err)
+//     return NextResponse.json(
+//       { success: false, message: "Failed to send OTP" },
+//       { status: 500 }
+//     )
+//   }
+// }
+
+
+
+
 import { db } from "@/lib/db"
-import { saveEmailOTP } from "@/lib/otpStore"
-import { sendOTPEmail } from "@/lib/mailer"
 import { NextResponse } from "next/server"
+import nodemailer from "nodemailer"
 
 export async function POST(req) {
   try {
     const { email } = await req.json()
-
-    const [[user]] = await db.query(
-      "SELECT id FROM users WHERE email = ?",
-      [email]
-    )
-
-    if (!user) {
-      return NextResponse.json(
-        { success: false, message: "Email not registered" },
-        { status: 404 }
-      )
+    if (!email) {
+      return NextResponse.json({ message: "Email required" }, { status: 400 })
     }
 
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000) // 10 min
 
-    saveEmailOTP(email, otp)
-    await sendOTPEmail(email, otp)
+    // 🔥 IMPORTANT: delete old OTPs
+    await db.query("DELETE FROM email_otps WHERE email = ?", [email])
+
+    await db.query(
+      "INSERT INTO email_otps (email, otp, expires_at) VALUES (?, ?, ?)",
+      [email, otp, expiresAt]
+    )
+
+    const transporter = nodemailer.createTransport({
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
+      requireTLS: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    })
+
+    await transporter.sendMail({
+      from: `"DxAssist" <${process.env.EMAIL_USER}>`,
+      to: email,
+      subject: "Your OTP Code",
+      text: `Your OTP is ${otp}. Valid for 10 minutes.`,
+    })
 
     return NextResponse.json({ success: true })
-
   } catch (err) {
-    console.error("EMAIL OTP ERROR:", err)
-    return NextResponse.json(
-      { success: false, message: "Failed to send OTP" },
-      { status: 500 }
-    )
+    console.error("SEND OTP ERROR:", err)
+    return NextResponse.json({ message: "Failed to send OTP" }, { status: 500 })
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1248,7 +1248,7 @@ export default function Home() {
   return (
     <main
       ref={root}
-      className="relative bg-[#f5f9ff] text-slate-900 overflow-hidden"
+      className="relative bg-[#f5f9ff] text-black overflow-hidden"
     >
       {/* SOFT MEDICAL GLOW */}
       <div

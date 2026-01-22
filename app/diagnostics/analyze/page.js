@@ -156,7 +156,7 @@ export default function AnalyzePage() {
   };
 
   return (
-    <div className="p-8 max-w-6xl mx-auto text-white">
+    <div className="p-8 max-w-6xl mx-auto text-black">
       <h1 className="text-3xl font-bold mb-4">
         Clinical Document Analysis
       </h1>
@@ -198,7 +198,6 @@ export default function AnalyzePage() {
           </p>
         </>
       )}
-
       {/* Clinical Priorities (SORTED) */}
       {Array.isArray(result?.conditions) &&
         result.conditions.length > 0 && (
