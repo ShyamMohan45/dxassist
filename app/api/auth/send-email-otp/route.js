@@ -45,20 +45,54 @@ import nodemailer from "nodemailer"
 export async function POST(req) {
   try {
     const { email } = await req.json()
+    
     if (!email) {
       return NextResponse.json({ message: "Email required" }, { status: 400 })
     }
 
+    console.log("📧 [OTP] Attempting to send OTP to:", email)
+
+    // ✅ Step 1: Verify email exists in users table
+    const [users] = await db.query(
+      "SELECT id FROM users WHERE email = ?",
+      [email]
+    )
+
+    if (users.length === 0) {
+      console.warn("⚠️ [OTP] Email not registered:", email)
+      return NextResponse.json(
+        { message: "Email not registered. Please sign up first." },
+        { status: 404 }
+      )
+    }
+
+    console.log("✅ [OTP] Email found in database")
+
+    // ✅ Step 2: Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
     const expiresAt = new Date(Date.now() + 10 * 60 * 1000) // 10 min
 
-    // 🔥 IMPORTANT: delete old OTPs
-    await db.query("DELETE FROM email_otps WHERE email = ?", [email])
+    // ✅ Step 3: Delete old OTPs and insert new one
+    try {
+      await db.query("DELETE FROM email_otps WHERE email = ?", [email])
+      console.log("✅ [OTP] Deleted old OTPs")
 
-    await db.query(
-      "INSERT INTO email_otps (email, otp, expires_at) VALUES (?, ?, ?)",
-      [email, otp, expiresAt]
-    )
+      await db.query(
+        "INSERT INTO email_otps (email, otp, expires_at) VALUES (?, ?, ?)",
+        [email, otp, expiresAt]
+      )
+      console.log("✅ [OTP] OTP stored in database:", otp)
+    } catch (dbErr) {
+      console.error("❌ [OTP] Database error:", dbErr.message)
+      throw new Error(`Database error: ${dbErr.message}`)
+    }
+
+    // ✅ Step 4: Configure SMTP transporter
+    console.log("📨 [OTP] Configuring email transporter...")
+    
+    if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
+      throw new Error("EMAIL_USER or EMAIL_PASS not configured in .env.local")
+    }
 
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
@@ -69,19 +103,56 @@ export async function POST(req) {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
       },
+      logger: true,
+      debug: true,
     })
 
-    await transporter.sendMail({
+    // ✅ Step 5: Send email
+    console.log("🚀 [OTP] Sending email via Gmail SMTP...")
+    
+    const info = await transporter.sendMail({
       from: `"DxAssist" <${process.env.EMAIL_USER}>`,
       to: email,
-      subject: "Your OTP Code",
+      subject: "🔐 Your DxAssist OTP Code",
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 20px;">
+          <h2 style="color: #333;">Verify Your Email</h2>
+          <p>Your OTP code is:</p>
+          <div style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; text-align: center; margin: 20px 0;">
+            <h1 style="color: #2563eb; margin: 0; letter-spacing: 2px;">${otp}</h1>
+          </div>
+          <p style="color: #666; font-size: 14px;">⏱️ Valid for 10 minutes</p>
+          <p style="color: #999; font-size: 12px;">If you didn't request this, please ignore this email.</p>
+        </div>
+      `,
       text: `Your OTP is ${otp}. Valid for 10 minutes.`,
     })
 
-    return NextResponse.json({ success: true })
+    console.log("✅ [OTP] Email sent successfully! Message ID:", info.messageId)
+
+    return NextResponse.json({ 
+      success: true, 
+      message: "OTP sent successfully",
+      debug: {
+        email: email,
+        otp: otp,
+        expiresAt: expiresAt.toISOString(),
+        messageId: info.messageId
+      }
+    })
+
   } catch (err) {
-    console.error("SEND OTP ERROR:", err)
-    return NextResponse.json({ message: "Failed to send OTP" }, { status: 500 })
+    console.error("❌ [OTP] ERROR:", err.message)
+    console.error("❌ [OTP] Full error:", err)
+    
+    return NextResponse.json(
+      { 
+        message: "Failed to send OTP",
+        error: err.message,
+        details: process.env.NODE_ENV === "development" ? err.toString() : undefined
+      },
+      { status: 500 }
+    )
   }
 }
 

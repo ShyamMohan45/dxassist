@@ -1,6 +1,16 @@
+# fastapi
+# uvicorn
+# python-multipart
+# google-generativeai
+# python-dotenv
+# mysql-connector-python
+
+
 fastapi
 uvicorn
 python-multipart
-google-generativeai
-python-dotenv
 mysql-connector-python
+python-dotenv
+pypdf
+nltk
+google-generativeai

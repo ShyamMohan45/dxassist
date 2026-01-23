@@ -120,6 +120,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+
+
 # -----------------------------
 # Analyze Endpoint
 # -----------------------------
@@ -143,12 +146,24 @@ async def analyze(
             user_id=user["id"],
             summary=result["summary"],
             conditions=result["conditions"],
-            evidence=result["evidence"]
+            evidence=result.get("evidence", [])
         )
 
+        # Return complete result with all fields
         return {
             "status": "success",
-            "data": result
+            "summary": result.get("summary", ""),
+            "conditions": result.get("conditions", []),
+            "evidence": result.get("evidence", [])
+        }
+
+    except Exception as e:
+        return {
+            "status": "error",
+            "message": str(e),
+            "summary": "Analysis failed",
+            "conditions": [],
+            "evidence": []
         }
 
     finally:
@@ -169,17 +184,19 @@ def get_past_analyses(user=Depends(get_user)):
     }
 
 
+# this above is initial code 
 
-# from fastapi import FastAPI, Request, Response, HTTPException
-# from fastapi.middleware.cors import CORSMiddleware
-# import mysql.connector
+
 # import os
+# import time
+# from fastapi import FastAPI, UploadFile, File, Depends, Header, HTTPException
+# from fastapi.middleware.cors import CORSMiddleware
 
-# from app.auth import require_admin
+# from app.ai import analyze_medical_file
+# from app.db import save_analysis, get_analyses_by_user
 
 # app = FastAPI()
 
-# # ---------------- CORS ----------------
 # app.add_middleware(
 #     CORSMiddleware,
 #     allow_origins=["http://localhost:3000"],
@@ -188,83 +205,45 @@ def get_past_analyses(user=Depends(get_user)):
 #     allow_headers=["*"],
 # )
 
-# # ---------------- DB ----------------
-# def get_db():
-#     return mysql.connector.connect(
-#         host=os.getenv("DATABASE_HOST"),
-#         user=os.getenv("DATABASE_USER"),
-#         password=os.getenv("DATABASE_PASS"),
-#         database=os.getenv("DATABASE_NAME"),
-#     )
-
-# # ---------------- ADMIN LOGIN ----------------
-# @app.post("/admin/login")
-# def admin_login(data: dict, response: Response):
-#     email = data.get("email")
-#     password = data.get("password")
-
-#     if (
-#         email != os.getenv("ADMIN_EMAIL")
-#         or password != os.getenv("ADMIN_SECRET_PASSWORD")
-#     ):
-#         raise HTTPException(status_code=403, detail="Invalid admin credentials")
-
-#     response.set_cookie(
-#         key="admin_auth",
-#         value="true",
-#         httponly=True,
-#         samesite="lax",
-#     )
-
-#     return {"success": True}
-
-
-# # ---------------- ADMIN DASHBOARD ----------------
-# @app.get("/admin/dashboard")
-# def admin_dashboard(patient_email: str, request: Request):
-#     require_admin(request)
-
-#     db = get_db()
-#     cursor = db.cursor(dictionary=True)
-
-#     cursor.execute(
-#         """
-#         SELECT id, email, last_login
-#         FROM users
-#         WHERE email = %s
-#         """,
-#         (patient_email,),
-#     )
-
-#     user = cursor.fetchone()
-#     if not user:
-#         raise HTTPException(status_code=404, detail="Patient not found")
-
-#     cursor.execute(
-#         """
-#         SELECT summary, created_at
-#         FROM medical_analyses
-#         WHERE user_id = %s
-#         ORDER BY created_at DESC
-#         LIMIT 1
-#         """,
-#         (user["id"],),
-#     )
-#     last_analysis = cursor.fetchone()
-
-#     cursor.execute(
-#         """
-#         SELECT COUNT(*) AS total
-#         FROM medical_analyses
-#         WHERE user_id = %s
-#         """,
-#         (user["id"],),
-#     )
-#     total_docs = cursor.fetchone()["total"]
+# def get_user(
+#     x_user_id: str = Header(None),
+#     x_user_email: str = Header(None)
+# ):
+#     if not x_user_id:
+#         raise HTTPException(status_code=401, detail="Unauthorized")
 
 #     return {
-#         "email": user["email"],
-#         "last_login": user["last_login"],
-#         "documents_analyzed": total_docs,
-#         "last_analysis": last_analysis,
+#         "id": int(x_user_id),
+#         "email": x_user_email,
 #     }
+
+# @app.post("/analyze")
+# async def analyze(
+#     file: UploadFile = File(...),
+#     user=Depends(get_user)
+# ):
+#     temp = f"temp_{user['id']}_{file.filename}"
+
+#     try:
+#         with open(temp, "wb") as f:
+#             f.write(await file.read())
+
+#         result = analyze_medical_file(temp)
+
+#         save_analysis(
+#             user_id=user["id"],
+#             summary=result["summary"],
+#             conditions=result["conditions"],
+#             evidence=result.get("evidence", [])
+#         )
+
+#         return {"data": result}
+
+#     finally:
+#         if os.path.exists(temp):
+#             time.sleep(0.2)
+#             os.remove(temp)
+
+# @app.get("/analyses")
+# def analyses(user=Depends(get_user)):
+#     return {"data": get_analyses_by_user(user["id"])}

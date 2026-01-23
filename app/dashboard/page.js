@@ -1973,9 +1973,23 @@ export default function DashboardPage() {
 
       {/* ================= CLINICAL SNAPSHOT ================= */}
       <section className="mb-10">
-        <h2 className="text-xl font-semibold mb-6">
-          Clinical Snapshot of last analysis
-        </h2>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold">
+            Clinical Snapshot of last analysis
+          </h2>
+          <button
+            onClick={() => setShowAllHistory(!showAllHistory)}
+            className="
+              px-4 py-2 rounded-lg
+              text-sm font-medium
+              bg-indigo-600 text-white
+              hover:bg-indigo-700
+              transition-colors
+            "
+          >
+            {showAllHistory ? "Hide all history" : "View all history"}
+          </button>
+        </div>
 
         <motion.div
           variants={card}
@@ -2000,41 +2014,64 @@ export default function DashboardPage() {
         </motion.div>
       </section>
 
-      {/* ================= HISTORY ================= */}
-      <button
-        onClick={() => setShowAllHistory(!showAllHistory)}
-        className="text-indigo-700 font-medium hover:underline"
-      >
-        {showAllHistory ? "Hide all history" : "View all history"}
-      </button>
-
       {showAllHistory && (
-        <section className="mt-6">
-          <h2 className="text-xl font-semibold mb-6">All Analysis History</h2>
+        <section className="mt-8">
+          <h2 className="text-xl font-semibold mb-6">
+            All Analysis History ({analyses.length})
+          </h2>
           <div className="space-y-4">
-            {analyses.map((item, i) => (
-              <motion.div
-                key={i}
-                variants={card}
-                initial="hidden"
-                animate="show"
-                className="
-                  rounded-xl
-                  border border-slate-300
-                  bg-white
-                  p-5
-                  shadow-md
-                "
-              >
-                <p className="font-medium text-slate-900 leading-relaxed">
-                  {item.summary}
-                </p>
-                <p className="text-xs text-slate-500 mt-1">
-                  {new Date(item.created_at).toLocaleString()}
-                </p>
-              </motion.div>
-            ))}
+            {analyses.length > 0 ? (
+              analyses.map((item, i) => (
+                <motion.div
+                  key={i}
+                  variants={card}
+                  initial="hidden"
+                  animate="show"
+                  className="
+                    rounded-xl
+                    border border-slate-300
+                    bg-white
+                    p-5
+                    shadow-md
+                    hover:shadow-lg
+                    transition-shadow
+                  "
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <p className="font-medium text-slate-900 leading-relaxed">
+                        {item.summary}
+                      </p>
+                      <p className="text-xs text-slate-500 mt-2">
+                        📅 {new Date(item.created_at).toLocaleString()}
+                      </p>
+                    </div>
+                    <span className="text-xs bg-slate-200 text-slate-700 px-2 py-1 rounded">
+                      #{i + 1}
+                    </span>
+                  </div>
+                </motion.div>
+              ))
+            ) : (
+              <p className="text-slate-600 text-center py-8">
+                No analysis history available
+              </p>
+            )}
           </div>
+          
+          {/* Hide Button at Bottom */}
+          <button
+            onClick={() => setShowAllHistory(false)}
+            className="
+              mt-6 px-4 py-2 rounded-lg
+              text-sm font-medium
+              bg-slate-300 text-slate-900
+              hover:bg-slate-400
+              transition-colors
+            "
+          >
+            Hide all history
+          </button>
         </section>
       )}
 
