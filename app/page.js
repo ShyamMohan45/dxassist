@@ -1567,7 +1567,7 @@ export default function Home() {
       {/* ================= HERO 3D SECTION ================= */}
       {/* <main className="bg-gradient-to-b from-[#020617] via-[#030712] to-black"> */}
       <main className="relative">
-        <div className="relative h-[740px] overflow-visible"> {/* 🔥 REMOVE overflow-hidden */}
+        <div className="relative h-[1020px] overflow-visible"> {/* 🔥 REMOVE overflow-hidden */}
 
   {/* THREE.JS BACKGROUND */}
   <div className="absolute inset-0 z-0 pointer-events-none">
