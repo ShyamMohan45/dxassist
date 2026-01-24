@@ -1,28 +1,54 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useAuth } from "@/app/context/AuthContext";
 import SeverityCard from "../analyze/SeverityCard";
 
 export default function PastAnalysesPage() {
+  const { user } = useAuth();
   const [analyses, setAnalyses] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!user || !user.id) {
+      setLoading(false);
+      return;
+    }
+
     fetch("http://127.0.0.1:8001/analyses", {
       credentials: "include",
+      headers: {
+        "x-user-id": user.id.toString(),
+      },
     })
       .then((res) => res.json())
       .then((json) => {
         setAnalyses(json.data || []);
         setLoading(false);
       })
-      .catch(() => setLoading(false));
-  }, []);
+      .catch((err) => {
+        console.error("Error fetching analyses:", err);
+        setLoading(false);
+      });
+  }, [user]);
 
   if (loading) {
     return (
       <div className="p-8 text-white">
         Loading past analyses...
+      </div>
+    );
+  }
+
+  if (!user) {
+    return (
+      <div className="p-8 max-w-6xl mx-auto text-white">
+        <h1 className="text-3xl font-bold mb-6">
+          View Past Analyses
+        </h1>
+        <p className="text-red-400">
+          Please login to view your past analyses.
+        </p>
       </div>
     );
   }

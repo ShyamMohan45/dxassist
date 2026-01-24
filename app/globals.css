@@ -1,3 +1,114 @@
+/* @import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+  --base-color--green: #10b981; 
+} */
+ 
+/* body {
+  @apply bg-white text-black dark:bg-slate-900 dark:text-white;
+} */
+/* html, body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+} */
+
+
+/* @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+} */
+
+/* @media (prefers-color-scheme: dark) { */
+  /* :root { */
+    /* --background: #0a0a0a;
+    --foreground: #ededed;
+    --base-color--green: #059669; darker green for dark mode */
+  /* } */
+/* } */
+/* 
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+} */
+
+/* 
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+/* Hide native video time display in WebKit/Blink browsers (Chrome, Edge, Safari)
+   This hides current and remaining time while keeping native controls visible. */
+/* video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display,
+video::-webkit-media-controls-timeline,
+video::-webkit-media-controls-enclosure {
+  display: none !important;
+} */
+/* Hide Google Translate top bar */
+/* Hide Google branding text */
+/* .goog-logo-link,
+.goog-te-gadget span {
+  display: none !important;
+} */
+
+/* Fix layout spacing */
+/* .goog-te-gadget {
+  font-size: 0 !important;
+} */
+
+/* Style dropdown to match navbar */
+/* .goog-te-combo {
+  font-size: 14px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  border: 1px solid #000;
+  background-color: white;
+  cursor: pointer;
+} */
+
+/* Remove Google top bar */
+/* body > .goog-te-banner-frame {
+  display: none !important;
+} */
+
+/* body {
+  top: 0 !important;
+} */
+
+/* .input {
+  width: 100%;
+  margin-bottom: 1.2rem;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #cbd5e1;
+  outline: none;
+} */
+/* html, body { */
+  /* background: linear-gradient(
+    to bottom,
+    #f8fafc,
+    #eef6f4,
+    #f1f5f9
+  ); */
+/* } */
+
+/* 
+canvas {
+  display: block;
+} */
+
+
 @import "tailwindcss";
 
 :root {
@@ -40,7 +151,7 @@ html, body {
   }
 }
 
-
+/*  */
 body {
   background: var(--background);
   color: var(--foreground);
@@ -101,8 +212,6 @@ html, body {
     #f1f5f9
   );
 }
-
-
 canvas {
   display: block;
 }

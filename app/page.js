@@ -1667,21 +1667,32 @@ export default function Home() {
                   rounded-full border border-emerald-300/40 
                   bg-white px-4 py-1.5 shadow-sm">
     <span className="h-2 w-2 rounded-full bg-emerald-500" />
-    <span className="text-[11px] uppercase tracking-[0.3em] 
+    <span className="text-[15px] uppercase tracking-[0.3em] 
                      text-emerald-700">
       AI Powered Healthcare
     </span>
   </div>
 
   {/* HEADING */}
-  <h2 className="relative text-slate-900 
-                 text-3xl md:text-4xl 
+  {/* <h2 className="relative text-slate-900 
+                 text-7xl md:text-4xl 
                  font-semibold leading-tight max-w-2xl">
     Precision Diagnostic Assistance
-    <span className="block text-slate-600 font-normal text-lg mt-3">
+    <span className="block text-slate-600 font-normal text-xl mt-3">
       Built to elevate clinical decision-making
     </span>
-  </h2>
+  </h2> */}
+{/* HEADING */}
+<h2 className="relative text-slate-900 
+               text-8xl md:text-6xl 
+               font-semibold leading-tight max-w-2xl">
+  Precision Diagnostic Assistance
+  <span className="block text-slate-600 font-normal text-3xl mt-3">
+    Built to elevate clinical decision-making
+  </span>
+</h2>
+
+
 
   {/* DIVIDER */}
   <div className="mt-8 mb-10 flex items-center gap-4">
@@ -1693,12 +1704,13 @@ export default function Home() {
   </div>
 
   {/* DESCRIPTION */}
-  <p className="relative max-w-xl text-slate-600 text-sm leading-relaxed">
+  <p className="relative max-w-xl text-slate-600 text-2xl leading-relaxed">
     Dx Assist combines advanced generative AI with evidence-backed medical
     knowledge to transform unstructured clinical data into clear, actionable
     insights — without disrupting existing workflows.
   </p>
 </div>
+
 
 
         {/* ================= ADVANCED AI PIPELINE ================= */}

@@ -677,14 +677,14 @@ className="
       {/* logo */}
       <Link
         href="/"
-        className="relative text-4xl font-extrabold tracking-wide
+        className="relative text-2xl font-extrabold tracking-wide
                    bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500
                    bg-clip-text text-transparent"
       >
         DxAssist
       </Link>
 
-      <ul className="relative flex items-center gap-10 text-xl font-semibold">
+      <ul className="relative flex items-center gap-10 text-sm font-semibold">
         {[
           { name: "dashboard", href: "/dashboard" },
           { name: "Clinical Analysis", href: "/diagnostics" },
