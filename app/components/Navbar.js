@@ -628,6 +628,139 @@
 
 
 
+// "use client"
+
+// import Link from "next/link"
+// import { useRouter } from "next/navigation"
+// import { useEffect } from "react"
+// import ThemeToggle from "./ThemeToggle"
+// import { useAuth } from "../context/AuthContext"
+
+// export default function Navbar() {
+//   const { user, loading, setUser } = useAuth()
+//   const router = useRouter()
+
+//   // ✅ Always initialize Google Translate AFTER mount
+//   useEffect(() => {
+//     const interval = setInterval(() => {
+//       if (
+//         window.google &&
+//         window.google.translate &&
+//         typeof window.googleTranslateElementInit === "function"
+//       ) {
+//         window.googleTranslateElementInit()
+//         clearInterval(interval)
+//       }
+//     }, 300)
+
+//     return () => clearInterval(interval)
+//   }, [])
+
+//   return (
+//     <nav
+// className="      
+//         sticky top-0 left-0 right-0
+//         z-[100]
+//         flex justify-between items-center
+//         min-h-20 px-10
+//         bg-gradient-to-b from-[#0E1B2B] to-[#0B1623]
+//         backdrop-blur-2xl
+//         text-black dark:text-white
+//         border-b border-black/10 dark:border-slate-700/40
+//         shadow-[0_10px_40px_rgba(0,0,0,0.08)]
+//         overflow-visible
+//       "
+//     >
+//       {/* glow */}
+//       <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-emerald-400/10 via-cyan-400/10 to-blue-400/10 blur-2xl opacity-70" />
+
+//       {/* logo */}
+//       <Link
+//         href="/"
+//         className="relative text-2xl font-extrabold tracking-wide
+//                    bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500
+//                    bg-clip-text text-transparent"
+//       >
+//         DxAssist
+//       </Link>
+
+//       <ul className="relative flex items-center gap-10 text-sm font-semibold">
+//         {[
+//           { name: "dashboard", href: "/dashboard" },
+//           { name: "Clinical Analysis", href: "/diagnostics" },
+//           { name: "Medical Knowledge Base", href: "/history" },
+//         ].map((item) => (
+//           <li key={item.href} className="relative group">
+//             <Link href={item.href} className="opacity-80 hover:opacity-100">
+//               {item.name}
+//             </Link>
+//             <span className="absolute -bottom-2 left-1/2 -translate-x-1/2
+//                              h-[2px] w-0 bg-gradient-to-r
+//                              from-emerald-400 to-cyan-400
+//                              group-hover:w-full transition-all" />
+//           </li>
+//         ))}
+
+//         {/* CTA */}
+//         <li className="relative group">
+//           <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-xl blur opacity-60" />
+//           <Link
+//             href="/start"
+//             className="relative px-6 py-2.5 rounded-xl
+//                        bg-gradient-to-r from-emerald-400 to-cyan-400
+//                        text-black font-bold"
+//           >
+//             Get started
+//           </Link>
+//         </li>
+
+//         {/* AUTH — handled safely */}
+//         {!loading && !user && (
+//           <>
+//             <li>
+//               <Link href="/login" className="opacity-80 hover:opacity-100">
+//                 Login
+//               </Link>
+//             </li>
+//             <li>
+//               <Link href="/signup" className="opacity-80 hover:opacity-100">
+//                 Signup
+//               </Link>
+//             </li>
+//           </>
+//         )}
+
+//         {!loading && user && (
+//           <li className="flex items-center gap-4">
+//             <span className="text-emerald-400 font-bold">{user.name}</span>
+//             <button
+//               onClick={async () => {
+//                 await fetch("/api/auth/logout", { method: "POST" })
+//                 setUser(null)
+//                 router.push("/")
+//               }}
+//               className="text-red-400 hover:text-red-500"
+//             >
+//               Logout
+//             </button>
+//           </li>
+//         )}
+
+//         {/* 🌍 GOOGLE TRANSLATE — ALWAYS PRESENT */}
+//         <li className="px-3 py-1.5 rounded-lg bg-black/5 dark:bg-white/10">
+//           <div id="google_translate_element" />
+//         </li>
+
+//         {/* theme */}
+//         <li>
+//           <ThemeToggle />
+//         </li>
+//       </ul>
+//     </nav>
+//   )
+// }
+
+
 "use client"
 
 import Link from "next/link"
@@ -677,7 +810,7 @@ className="
       {/* logo */}
       <Link
         href="/"
-        className="relative text-2xl font-extrabold tracking-wide
+        className="relative text-3xl font-extrabold tracking-wide
                    bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-500
                    bg-clip-text text-transparent"
       >
@@ -702,7 +835,7 @@ className="
         ))}
 
         {/* CTA */}
-        <li className="relative group">
+        {/* <li className="relative group">
           <div className="absolute -inset-1 bg-gradient-to-r from-emerald-400 to-cyan-400 rounded-xl blur opacity-60" />
           <Link
             href="/start"
@@ -710,9 +843,9 @@ className="
                        bg-gradient-to-r from-emerald-400 to-cyan-400
                        text-black font-bold"
           >
-            Get started
+            Get start
           </Link>
-        </li>
+        </li> */}
 
         {/* AUTH — handled safely */}
         {!loading && !user && (

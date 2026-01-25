@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useRef, useMemo, useEffect } from "react"
@@ -5,30 +6,31 @@ import { useFrame, useThree } from "@react-three/fiber"
 import { Text } from "@react-three/drei"
 import * as THREE from "three"
 
-function Stars({ count = 1600 }) {   // ⭐ EFFECTIVELY FEWER STARS
+
+function Stars({ count = 2200 }) {
   const pointsRef = useRef()
 
   const positions = useMemo(() => {
     const arr = new Float32Array(count * 3)
     for (let i = 0; i < count; i++) {
-      arr[i * 3]     = (Math.random() - 0.5) * 44   // 🌌 wider space
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 32
-      arr[i * 3 + 2] = -Math.random() * 45          // 🌌 deeper
+      arr[i * 3]     = (Math.random() - 0.5) * 50
+      arr[i * 3 + 1] = (Math.random() - 0.5) * 36
+      arr[i * 3 + 2] = -Math.random() * 60
     }
     return arr
   }, [count])
 
   useFrame(({ clock }) => {
     if (!pointsRef.current) return
-
     const t = clock.elapsedTime
 
-    // ✨ subtle twinkle (LESS noise)
+  
     pointsRef.current.material.opacity =
-      0.55 + Math.sin(t * 1.2) * 0.15
+      0.6 + Math.sin(t * 1.6) * 0.2
 
-    // 🚀 FASTER LEFT → RIGHT MOTION (MATCH REF)
-    pointsRef.current.position.x = (t * 0.6) % 18 - 9
+    
+    pointsRef.current.position.x = (t * 1.8) % 30 - 15
+    pointsRef.current.position.z = (t * 1.1) % 25 - 12
   })
 
   return (
@@ -44,10 +46,9 @@ function Stars({ count = 1600 }) {   // ⭐ EFFECTIVELY FEWER STARS
 
       <pointsMaterial
         color="#9ff5ea"
-        size={0.11}          // ⭐ visually same as ref
-        sizeAttenuation
+        size={0.13}
         transparent
-        opacity={0.6}        // ⭐ makes far stars fade
+        opacity={0.6}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
       />
@@ -55,54 +56,57 @@ function Stars({ count = 1600 }) {   // ⭐ EFFECTIVELY FEWER STARS
   )
 }
 
-  
-
 
 export default function Scene() {
   const textRef = useRef()
-  const { gl } = useThree()
+  const { gl, camera } = useThree()
 
   useEffect(() => {
     gl.setClearColor("#020617", 1)
-  }, [gl])
+
+  
+    camera.position.set(0, 0, 9)
+    camera.lookAt(0, 0, 0)
+  }, [gl, camera])
 
   useFrame(({ clock }) => {
     if (textRef.current) {
       textRef.current.material.emissiveIntensity =
-        0.9 + Math.sin(clock.elapsedTime * 1.4) * 0.3
+        1 + Math.sin(clock.elapsedTime * 1.5) * 0.35
     }
   })
 
   return (
     <>
-      {/* ⭐ STARS */}
+    
       <Stars />
 
-      {/* 💡 LIGHTING */}
-      <ambientLight intensity={0.1} />
+      
+      <ambientLight intensity={0.15} />
       <pointLight
-        position={[0, 0, 6]}
-        intensity={2.9}
+        position={[0, 0, 7]}
+        intensity={3}
         color="#00ffe1"
       />
 
-      {/* ✨ TEXT */}
+      
       <Text
-        ref={textRef}
-        fontSize={1.6}
-        letterSpacing={-0.05}
-        anchorX="center"
-        anchorY="middle"
+       ref={textRef}
+  position={[0, 0.5, 0]}   // 🔼 moves text upward
+  fontSize={1.7}
+  letterSpacing={-0.06}
+  anchorX="center"
+  anchorY="middle"
       >
         Dx Assist
         <meshStandardMaterial
           color="#dffffa"
           emissive="#00ffe1"
-          emissiveIntensity={0.95}
-          metalness={0.4}
-          roughness={0.35}
+          emissiveIntensity={1}
+          metalness={0.45}
+          roughness={0.3}
           transparent
-          opacity={0.96}
+          opacity={0.97}
         />
       </Text>
     </>

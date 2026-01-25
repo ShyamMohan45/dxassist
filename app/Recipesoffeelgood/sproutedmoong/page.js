@@ -5,17 +5,17 @@ export default function Page() {
   return (
     <main className="bg-gradient-to-br from-[#f2fbf8] via-[#f7fbfa] to-[#eef6f4] text-gray-800">
 
-      {/* HERO CARD */}
+      
       <section className="w-full max-w-7xl mx-auto mt-10 rounded-3xl overflow-hidden shadow-2xl border border-black/10 bg-white">
 
-        {/* HEADER */}
+        
         <div className="w-full h-[56px] flex items-center px-10 bg-gradient-to-r from-teal-900 to-teal-700">
           <h1 className="text-3xl font-serif tracking-wide text-white drop-shadow">
             Sprouted Moong Salad
           </h1>
         </div>
 
-        {/* IMAGE */}
+       
         <div className="w-full h-[340px] relative bg-gradient-to-br from-[#eaf3f1] to-[#d9ebe7]">
           <Image
             src="/sproutedmoong.jpg"
@@ -28,7 +28,7 @@ export default function Page() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
         </div>
 
-        {/* INFO STRIP */}
+        
         <div className="w-full h-[120px] flex items-center bg-white">
           <div className="w-full grid grid-cols-4 text-center divide-x divide-gray-200 px-8">
 
@@ -59,10 +59,10 @@ export default function Page() {
 
       </section>
 
-      {/* CONTENT */}
+      
       <section className="max-w-7xl mx-auto px-10 py-20 grid grid-cols-3 gap-16">
 
-        {/* LEFT */}
+       
         <div className="col-span-2 space-y-12">
 
           <div>
@@ -96,7 +96,7 @@ export default function Page() {
 
         </div>
 
-        {/* RIGHT CARD */}
+       
         <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 h-fit">
           <h2 className="text-2xl font-semibold mb-6 text-teal-900">
             Nutrients per serving
@@ -121,7 +121,7 @@ export default function Page() {
 
       </section>
 
-      {/* FOOTER */}
+     
       <section className="w-full bg-gradient-to-r from-[#062f38] to-[#0a4c58] text-white px-10 py-14 mt-24">
         <div className="max-w-5xl mx-auto text-center space-y-4">
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+
 """
 Clinical Analysis Feature - Integration Test
 Tests the complete workflow without requiring a medical file

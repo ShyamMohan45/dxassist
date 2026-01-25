@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-# Get the API token
+
 api_token = os.getenv("HUGGINGFACEHUB_API_TOKEN")
 
 try:
@@ -10,7 +10,7 @@ try:
 except Exception:
     InferenceClient = None
 
-# Use HuggingFace Inference API with a chat-optimized model
+
 client = None
 if InferenceClient is not None and api_token:
     try:
@@ -27,7 +27,7 @@ else:
 
 print("System: Chatbot initialized. Type 'exit' to quit.")
 
-# System message to guide the model behavior
+
 system_message = {
     "role": "system",
     "content": """You are a helpful health information chatbot. When answering health-related questions:
@@ -67,10 +67,10 @@ while True:
 
     try:
         if client is not None:
-            # Add user message to history
+           
             chat_history.append({"role": "user", "content": user_input})
             
-            # Use chat_completion (conversational) method
+           
             response = client.chat_completion(
                 model="meta-llama/Meta-Llama-3-8B-Instruct",
                 messages=chat_history,
@@ -78,10 +78,10 @@ while True:
                 temperature=0.7,
             )
             
-            # Extract bot response
+           
             bot_text = response.choices[0].message.content.strip()
             
-            # Add bot response to history
+           
             chat_history.append({"role": "assistant", "content": bot_text})
             
             print("Bot:", bot_text)

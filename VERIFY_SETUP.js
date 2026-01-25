@@ -1,18 +1,10 @@
-#!/usr/bin/env node
-
-/**
- * Quick OTP & Database Verification Script
- * Run this to verify your setup before testing
- */
 
 const fs = require('fs');
 const path = require('path');
 
 console.log('🔍 DxAssist OTP & Database Verification Script\n');
 
-// ============================================
-// 1. Check .env.local
-// ============================================
+
 console.log('1️⃣ Checking .env.local...');
 const envPath = path.join(__dirname, '../../.env.local');
 if (fs.existsSync(envPath)) {
@@ -31,9 +23,7 @@ if (fs.existsSync(envPath)) {
   console.log('❌ .env.local not found\n');
 }
 
-// ============================================
-// 2. Check required files
-// ============================================
+
 console.log('2️⃣ Checking required API routes...');
 const filesToCheck = [
   'app/api/auth/send-email-otp/route.js',

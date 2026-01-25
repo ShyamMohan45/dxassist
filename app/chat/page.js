@@ -1,3 +1,5 @@
+
+
 "use client"
 
 import { useEffect, useRef, useState } from "react"
@@ -15,23 +17,23 @@ export default function ChatPage() {
   const [streaming, setStreaming] = useState(false)
 
   const bottomRef = useRef(null)
-  // 🚀 Auto-send query from URL once
-useEffect(() => {
-  if (initialQuery && user && messages.length === 0) {
-    sendMessage()
-  }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, [initialQuery, user])
 
 
-  // 🔐 Auth guard
+  useEffect(() => {
+    if (initialQuery && user && messages.length === 0) {
+      sendMessage()
+    }
+  
+  }, [initialQuery, user])
+
+  
   useEffect(() => {
     if (!loading && !user) {
       router.replace("/login")
     }
   }, [loading, user, router])
 
-  // 🔽 Auto scroll
+ 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
@@ -45,7 +47,6 @@ useEffect(() => {
 
     setMessages((prev) => [...prev, { role: "user", text: userMessage }])
 
-    // Create empty bot message
     let botText = ""
     setMessages((prev) => [...prev, { role: "bot", text: "" }])
 
@@ -83,34 +84,61 @@ useEffect(() => {
   }
 
   return (
-    <main className="min-h-screen bg-black text-white px-[10vw] pt-24">
-      <h1 className="text-3xl font-semibold mb-8">Clinical Assistant</h1>
+    <main className="min-h-screen bg-gradient-to-br from-black via-slate-950 to-black text-white px-[10vw] pt-24">
+      <h1 className="text-4xl font-bold mb-10 tracking-tight">
+        🩺 Clinical Assistant
+      </h1>
 
-      {/* CHAT BOX */}
-      <div className="space-y-6 mb-32">
+      
+      <div className="space-y-6 pb-48">
         {messages.map((m, i) => (
-          <div key={i} className={m.role === "user" ? "text-right" : "text-left"}>
-            <p className="inline-block max-w-3xl px-4 py-3 rounded-xl bg-white/10">
-              <b>{m.role === "user" ? "You" : "DxAssist"}:</b> {m.text}
-            </p>
+          <div
+            key={i}
+            className={`flex ${
+              m.role === "user" ? "justify-end" : "justify-start"
+            }`}
+          >
+            <div
+              className={`max-w-3xl px-5 py-4 rounded-2xl text-sm leading-relaxed shadow-lg backdrop-blur-md ${
+                m.role === "user"
+                  ? "bg-gradient-to-r from-teal-500 to-emerald-500 text-black rounded-br-sm"
+                  : "bg-white/10 text-white border border-white/10 rounded-bl-sm"
+              }`}
+            >
+              <div className="text-xs font-semibold mb-1 opacity-70">
+                {m.role === "user" ? "You" : "DxAssist"}
+              </div>
+              {m.text}
+            </div>
           </div>
         ))}
-        <div ref={bottomRef} />
+
+        {/* 🔧 FIX: scroll anchor spacing */}
+        <div ref={bottomRef} className="h-24" />
       </div>
 
       {/* INPUT */}
-      <div className="fixed bottom-0 left-0 right-0 bg-black px-[10vw] py-6">
-        <input
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendMessage()}
-          placeholder="Ask a clinical question…"
-          className="
-            w-full bg-transparent border-b border-slate-500
-            py-4 text-lg text-white
-            focus:outline-none focus:border-teal-400
-          "
-        />
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/90 to-transparent px-[10vw] py-6 backdrop-blur-xl">
+        <div className="relative">
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            placeholder="Ask a clinical question…"
+            className="
+              w-full bg-white/5 border border-white/10
+              rounded-2xl px-6 py-4 text-base text-white
+              placeholder:text-slate-400
+              focus:outline-none focus:ring-2 focus:ring-teal-400
+              shadow-xl
+            "
+          />
+          {streaming && (
+            <span className="absolute right-5 top-1/2 -translate-y-1/2 text-xs text-teal-400 animate-pulse">
+              Thinking…
+            </span>
+          )}
+        </div>
       </div>
     </main>
   )
