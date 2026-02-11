@@ -320,7 +320,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "lint": "next lint"
   },
   "homepage": "https://github.com/ShyamMohan45/dxassist#readme",
